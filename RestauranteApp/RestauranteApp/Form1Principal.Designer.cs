@@ -28,78 +28,104 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1Principal));
             btnModoEdicion = new Button();
             btnModoPrevisualizacion = new Button();
             label1 = new Label();
             label2 = new Label();
+            pictureBox1 = new PictureBox();
             label3 = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnModoEdicion
             // 
+            btnModoEdicion.BackColor = SystemColors.Info;
+            btnModoEdicion.Cursor = Cursors.Hand;
             btnModoEdicion.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic);
             btnModoEdicion.Location = new Point(12, 195);
             btnModoEdicion.Name = "btnModoEdicion";
             btnModoEdicion.Size = new Size(243, 128);
             btnModoEdicion.TabIndex = 0;
             btnModoEdicion.Text = "Modo Edicion";
-            btnModoEdicion.UseVisualStyleBackColor = true;
+            btnModoEdicion.UseVisualStyleBackColor = false;
             btnModoEdicion.Click += btnModoEdicion_Click;
             // 
             // btnModoPrevisualizacion
             // 
+            btnModoPrevisualizacion.BackColor = SystemColors.Info;
+            btnModoPrevisualizacion.Cursor = Cursors.Hand;
             btnModoPrevisualizacion.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic);
             btnModoPrevisualizacion.Location = new Point(12, 359);
             btnModoPrevisualizacion.Name = "btnModoPrevisualizacion";
             btnModoPrevisualizacion.Size = new Size(243, 132);
             btnModoPrevisualizacion.TabIndex = 1;
             btnModoPrevisualizacion.Text = "Previsualizacion";
-            btnModoPrevisualizacion.UseVisualStyleBackColor = true;
+            btnModoPrevisualizacion.UseVisualStyleBackColor = false;
             btnModoPrevisualizacion.Click += btnModoPrevisualizacion_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.BorderStyle = BorderStyle.Fixed3D;
             label1.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 40);
+            label1.Location = new Point(46, 18);
             label1.Name = "label1";
-            label1.Size = new Size(260, 40);
+            label1.Size = new Size(174, 42);
             label1.TabIndex = 2;
-            label1.Text = "Restaurant Builder";
+            label1.Text = "Bienvenido!";
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.BorderStyle = BorderStyle.Fixed3D;
             label2.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label2.Location = new Point(30, 133);
+            label2.Location = new Point(33, 76);
             label2.Name = "label2";
-            label2.Size = new Size(196, 40);
+            label2.Size = new Size(198, 42);
             label2.TabIndex = 3;
             label2.Text = "Elige tu modo";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(280, 1);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(682, 519);
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
             // 
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.BorderStyle = BorderStyle.Fixed3D;
             label3.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.Location = new Point(507, 227);
+            label3.Location = new Point(80, 132);
             label3.Name = "label3";
-            label3.Size = new Size(277, 40);
-            label3.TabIndex = 4;
-            label3.Text = "Logo o Imagen Aqui";
+            label3.Size = new Size(99, 42);
+            label3.TabIndex = 5;
+            label3.Text = "↓ ↓ ↓ ↓";
             // 
             // Form1Principal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(960, 527);
+            BackColor = Color.FromArgb(192, 255, 192);
+            ClientSize = new Size(960, 519);
             Controls.Add(label3);
+            Controls.Add(pictureBox1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnModoPrevisualizacion);
             Controls.Add(btnModoEdicion);
             Name = "Form1Principal";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Restaurant Builder";
             Load += Form1Principal_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -110,6 +136,7 @@
         private Button btnModoPrevisualizacion;
         private Label label1;
         private Label label2;
+        private PictureBox pictureBox1;
         private Label label3;
     }
 }

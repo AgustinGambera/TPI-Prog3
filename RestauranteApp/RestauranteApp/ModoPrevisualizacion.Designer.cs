@@ -33,6 +33,7 @@
             previsualizacionToolStripMenuItem = new ToolStripMenuItem();
             edicionToolStripMenuItem = new ToolStripMenuItem();
             inicioToolStripMenuItem = new ToolStripMenuItem();
+            panelModoEdicion = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -41,7 +42,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { modoToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(1924, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -55,32 +56,46 @@
             // previsualizacionToolStripMenuItem
             // 
             previsualizacionToolStripMenuItem.Name = "previsualizacionToolStripMenuItem";
-            previsualizacionToolStripMenuItem.Size = new Size(180, 22);
+            previsualizacionToolStripMenuItem.Size = new Size(158, 22);
             previsualizacionToolStripMenuItem.Text = "Previsualizacion";
             // 
             // edicionToolStripMenuItem
             // 
             edicionToolStripMenuItem.Name = "edicionToolStripMenuItem";
-            edicionToolStripMenuItem.Size = new Size(180, 22);
+            edicionToolStripMenuItem.Size = new Size(158, 22);
             edicionToolStripMenuItem.Text = "Edicion";
             edicionToolStripMenuItem.Click += edicionToolStripMenuItem_Click;
             // 
             // inicioToolStripMenuItem
             // 
             inicioToolStripMenuItem.Name = "inicioToolStripMenuItem";
-            inicioToolStripMenuItem.Size = new Size(180, 22);
+            inicioToolStripMenuItem.Size = new Size(158, 22);
             inicioToolStripMenuItem.Text = "Inicio";
             inicioToolStripMenuItem.Click += inicioToolStripMenuItem_Click;
+            // 
+            // panelModoEdicion
+            // 
+            panelModoEdicion.AutoSize = true;
+            panelModoEdicion.BackColor = SystemColors.Info;
+            panelModoEdicion.BorderStyle = BorderStyle.FixedSingle;
+            panelModoEdicion.Location = new Point(251, 153);
+            panelModoEdicion.Name = "panelModoEdicion";
+            panelModoEdicion.Size = new Size(1429, 766);
+            panelModoEdicion.TabIndex = 1;
             // 
             // ModoPrevisualizacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.FromArgb(192, 255, 192);
+            ClientSize = new Size(1924, 1061);
+            Controls.Add(panelModoEdicion);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "ModoPrevisualizacion";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Preview";
+            WindowState = FormWindowState.Maximized;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -94,5 +109,6 @@
         private ToolStripMenuItem previsualizacionToolStripMenuItem;
         private ToolStripMenuItem edicionToolStripMenuItem;
         private ToolStripMenuItem inicioToolStripMenuItem;
+        private Panel panelModoEdicion;
     }
 }
