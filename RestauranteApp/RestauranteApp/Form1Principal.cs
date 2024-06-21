@@ -12,10 +12,11 @@ namespace RestauranteApp
         //Ambas funciones estan siendo invocadas, por lo cual se mostrarán 2 formas de entrar al ModoEdicion y al ModoPrevisualizacion, uno mediante un formprincipal y otro mediante un messagebox (una ventaja si/no/cancel).
         private void Form1Principal_Load(object sender, EventArgs e)
         {
-            MostrarMensajeInicial(); //Muestra un message box de bienvenida y da paso al form1Principal para elegir el modo diseño o previsualizacion. Ventaja: Hay un Form principal para dar estilo
-            MostrarBienvenida(); //Muestra un message box antes del form1principal, permitiendo directamente ir al modo diseño o preview. Ventaja: Directo al grano
+             //MostrarMensajeInicial(); //Muestra un message box de bienvenida y da paso al form1Principal para elegir el modo diseño o previsualizacion. Ventaja: Hay un Form principal para dar estilo
+             //MostrarBienvenida(); //Muestra un message box antes del form1principal, permitiendo directamente ir al modo diseño o preview. Ventaja: Directo al grano
         }
 
+        // Sin uso de esto..
         private void MostrarBienvenida()
         {
             // Mostrar un mensaje de bienvenida al usuario
@@ -26,6 +27,7 @@ namespace RestauranteApp
                             MessageBoxIcon.Information);
         }
 
+        // Sin uso de esto..
         private void MostrarMensajeInicial()
         {
             var result = MessageBox.Show("Seleccione el modo:\n1: Modo Edición\n2: Modo Previsualización",
@@ -47,6 +49,7 @@ namespace RestauranteApp
             }
         }
         
+        // Abrir el Modo Edición
         private void AbrirModoEdicion() //Abre el formulario de edicion, resultado del switch
         {
             this.Hide(); // Oculta el MainForm
@@ -55,6 +58,7 @@ namespace RestauranteApp
             editForm.Show();
         }
 
+        // Abrir el Modo Previsualización
         private void AbrirModoPrevisualizacion() //abre el form de preview, tambien resultado del switch
         {
             ModoPrevisualizacion previewForm = new ModoPrevisualizacion();
@@ -63,6 +67,8 @@ namespace RestauranteApp
         }
 
         //Estos botones son los del form1Principal. (el main).
+
+        // boton "Modo Edicion" del form1
         private void btnModoEdicion_Click(object sender, EventArgs e)
         {
             // Abrir el modo edición cuando el usuario haga clic en el botón correspondiente
@@ -72,6 +78,7 @@ namespace RestauranteApp
             modoEdicion.Show();
         }
 
+        // boton "Previsualizacion" del form1
         private void btnModoPrevisualizacion_Click(object sender, EventArgs e)
         {
             // Abrir el modo previsualización cuando el usuario haga clic en el botón correspondiente

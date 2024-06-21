@@ -32,6 +32,7 @@
             modoToolStripMenuItem = new ToolStripMenuItem();
             previsualizacionToolStripMenuItem = new ToolStripMenuItem();
             edicionToolStripMenuItem = new ToolStripMenuItem();
+            inicioToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,10 +47,10 @@
             // 
             // modoToolStripMenuItem
             // 
-            modoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { previsualizacionToolStripMenuItem, edicionToolStripMenuItem });
+            modoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { previsualizacionToolStripMenuItem, edicionToolStripMenuItem, inicioToolStripMenuItem });
             modoToolStripMenuItem.Name = "modoToolStripMenuItem";
-            modoToolStripMenuItem.Size = new Size(51, 20);
-            modoToolStripMenuItem.Text = "Modo";
+            modoToolStripMenuItem.Size = new Size(82, 20);
+            modoToolStripMenuItem.Text = "Navegacion";
             // 
             // previsualizacionToolStripMenuItem
             // 
@@ -62,7 +63,14 @@
             edicionToolStripMenuItem.Name = "edicionToolStripMenuItem";
             edicionToolStripMenuItem.Size = new Size(180, 22);
             edicionToolStripMenuItem.Text = "Edicion";
-            edicionToolStripMenuItem.Click += this.edicionToolStripMenuItem_Click;
+            edicionToolStripMenuItem.Click += edicionToolStripMenuItem_Click;
+            // 
+            // inicioToolStripMenuItem
+            // 
+            inicioToolStripMenuItem.Name = "inicioToolStripMenuItem";
+            inicioToolStripMenuItem.Size = new Size(180, 22);
+            inicioToolStripMenuItem.Text = "Inicio";
+            inicioToolStripMenuItem.Click += inicioToolStripMenuItem_Click;
             // 
             // ModoPrevisualizacion
             // 
@@ -85,5 +93,6 @@
         private ToolStripMenuItem modoToolStripMenuItem;
         private ToolStripMenuItem previsualizacionToolStripMenuItem;
         private ToolStripMenuItem edicionToolStripMenuItem;
+        private ToolStripMenuItem inicioToolStripMenuItem;
     }
 }
