@@ -35,5 +35,7 @@ namespace RestauranteApp
             form1Principal.FormClosed += (s, args) => Show();  // Mostrar el formulario principal al cerrar modo edición
             form1Principal.Show();
         }
+
+      
     }
 }

@@ -8,8 +8,14 @@
     <Compile Update="ModoEdicion.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ModoEdicionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="ModoPrevisualizacion.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ModoPrevisualizacionControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
 </Project>

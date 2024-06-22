@@ -2,92 +2,79 @@ namespace RestauranteApp
 {
     public partial class Form1Principal : Form
     {
+
+        private ModoEdicionControl modoEdicionControl;
+        private ModoPrevisualizacionControl modoPrevisualizacionControl;
+
         public Form1Principal()
         {
+
             InitializeComponent();
-            this.Text = "Restaurant Builder 1.0";
+            this.Text = "Restaurant Builder 1.0"; // Establece el título de la ventana
+
+            // Instanciamiento de los controles de edición y previsualización
+            modoEdicionControl = new ModoEdicionControl();
+            modoPrevisualizacionControl = new ModoPrevisualizacionControl();
+
+            //
+            modoEdicionControl.BackToMainFormRequested += ModoEdicionControl_BackToMainFormRequested;
+            this.Controls.Add(modoEdicionControl);
+
+            // Añadir controles al formulario principal (los establece como sus hijos).
+            this.Controls.Add(modoEdicionControl);
+            this.Controls.Add(modoPrevisualizacionControl);
+
+            // Configurar la visibilidad según el modo
+            // Facilmente podemos decidir cuando mostrarlo o no.
+            modoEdicionControl.Visible = false;
+            modoPrevisualizacionControl.Visible = false;
         }
 
-        //El form_load tiene 2 funciones. Mi idea es solo elegir una de ellas. O utilizar la alternativa de la clase Program.cs (ver)
-        //Ambas funciones estan siendo invocadas, por lo cual se mostrarán 2 formas de entrar al ModoEdicion y al ModoPrevisualizacion, uno mediante un formprincipal y otro mediante un messagebox (una ventaja si/no/cancel).
-        private void Form1Principal_Load(object sender, EventArgs e)
-        {
-             //MostrarMensajeInicial(); //Muestra un message box de bienvenida y da paso al form1Principal para elegir el modo diseño o previsualizacion. Ventaja: Hay un Form principal para dar estilo
-             //MostrarBienvenida(); //Muestra un message box antes del form1principal, permitiendo directamente ir al modo diseño o preview. Ventaja: Directo al grano
-        }
 
-        // Sin uso de esto..
-        private void MostrarBienvenida()
-        {
-            // Mostrar un mensaje de bienvenida al usuario
-            MessageBox.Show("Bienvenido a nuestra aplicación de gestión de restaurantes.\n" +
-                            "Por favor, elija una opción para continuar.",
-                            "Bienvenida",
-                            MessageBoxButtons.OK, //Boton aceptar
-                            MessageBoxIcon.Information);
-        }
-
-        // Sin uso de esto..
-        private void MostrarMensajeInicial()
-        {
-            var result = MessageBox.Show("Seleccione el modo:\n1: Modo Edición\n2: Modo Previsualización",
-                                         "Seleccionar Modo",
-                                         MessageBoxButtons.YesNoCancel,
-                                         MessageBoxIcon.Question);
-
-            switch (result)
-            {
-                case DialogResult.Yes:
-                    AbrirModoEdicion();
-                    break;
-                case DialogResult.No:
-                    AbrirModoPrevisualizacion();
-                    break;
-                case DialogResult.Cancel:
-                    Application.Exit();
-                    break;
-            }
-        }
-        
-        // Abrir el Modo Edición
-        private void AbrirModoEdicion() //Abre el formulario de edicion, resultado del switch
-        {
-            this.Hide(); // Oculta el MainForm
-            ModoEdicion editForm = new ModoEdicion();
-            editForm.FormClosed += (s, args) => this.Close(); // Cierra el MainForm cuando el EditForm se cierra
-            editForm.Show();
-        }
-
-        // Abrir el Modo Previsualización
-        private void AbrirModoPrevisualizacion() //abre el form de preview, tambien resultado del switch
-        {
-            ModoPrevisualizacion previewForm = new ModoPrevisualizacion();
-            //supongo que aquí faltaría la opción para cerrar el mainform cuando se cierre el previewForm
-            previewForm.Show();
-        }
-
-        //Estos botones son los del form1Principal. (el main).
-
-        // boton "Modo Edicion" del form1
         private void btnModoEdicion_Click(object sender, EventArgs e)
         {
-            // Abrir el modo edición cuando el usuario haga clic en el botón correspondiente
-            Hide();
-            ModoEdicion modoEdicion = new ModoEdicion();
-            modoEdicion.FormClosed += (s, args) => Show();  // Mostrar el formulario principal al cerrar modo edición
-            modoEdicion.Show();
+            //Ocultamos todos los controles del main form. (Se superpone sino, con el modo edicion).
+            btnModoEdicion.Visible = false;
+            btnModoPrevisualizacion.Visible = false;
+            label1.Visible = false;  
+            label2.Visible = false;
+            label3.Visible = false;
+            pictureBox1.Visible = false;
+
+            this.WindowState = FormWindowState.Maximized;   //Maximizamos :)
+
+            // Mostrar el control de edición y ocultar el de previsualización
+            modoEdicionControl.Visible = true;
+            modoPrevisualizacionControl.Visible = false;
+
         }
 
-        // boton "Previsualizacion" del form1
+
         private void btnModoPrevisualizacion_Click(object sender, EventArgs e)
         {
-            // Abrir el modo previsualización cuando el usuario haga clic en el botón correspondiente
-            Hide();
-            ModoPrevisualizacion modoPrevisualizacion = new ModoPrevisualizacion();
-            modoPrevisualizacion.FormClosed += (s, args) => Show();  // Mostrar el formulario principal al cerrar modo previsualización
-            modoPrevisualizacion.Show();
+            // Mostrar el control de previsualización y ocultar el de edición
+            modoEdicionControl.Visible = false;
+            modoPrevisualizacionControl.Visible = true;
+        }
+
+        private void ModoEdicionControl_BackToMainFormRequested(object sender, EventArgs e)
+        {
+            //Mostramos todos los controles del main form que estaban ocultos.
+            btnModoEdicion.Visible = true;
+            btnModoPrevisualizacion.Visible = true;
+            label1.Visible = true;
+            label2.Visible = true;
+            label3.Visible = true;
+            pictureBox1.Visible = true;
+
+
+
+            // Aquí decides qué hacer cuando el UserControl solicita volver al formulario principal
+            modoEdicionControl.Visible = false;
+            modoEdicionControl.Hide();                  // Oculta el ModoEdicionControl
+            
+            this.WindowState = FormWindowState.Normal;  // Restaura el tamaño original del MainForm
+
         }
     }
 }
-    
-

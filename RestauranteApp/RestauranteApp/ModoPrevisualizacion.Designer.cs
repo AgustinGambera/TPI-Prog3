@@ -78,9 +78,9 @@
             panelModoEdicion.AutoSize = true;
             panelModoEdicion.BackColor = SystemColors.Info;
             panelModoEdicion.BorderStyle = BorderStyle.FixedSingle;
-            panelModoEdicion.Location = new Point(251, 153);
+            panelModoEdicion.Location = new Point(309, 82);
             panelModoEdicion.Name = "panelModoEdicion";
-            panelModoEdicion.Size = new Size(1429, 766);
+            panelModoEdicion.Size = new Size(686, 365);
             panelModoEdicion.TabIndex = 1;
             // 
             // ModoPrevisualizacion

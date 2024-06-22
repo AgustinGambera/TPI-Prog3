@@ -409,7 +409,7 @@
             ItemsPicBox1.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox1.Cursor = Cursors.Hand;
             ItemsPicBox1.Image = (Image)resources.GetObject("ItemsPicBox1.Image");
-            ItemsPicBox1.Location = new Point(35, 34);
+            ItemsPicBox1.Location = new Point(36, 34);
             ItemsPicBox1.Name = "ItemsPicBox1";
             ItemsPicBox1.Size = new Size(54, 50);
             ItemsPicBox1.TabIndex = 0;
