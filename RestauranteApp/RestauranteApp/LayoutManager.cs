@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml;
+using System.Xml.Serialization;
 
 namespace RestauranteApp
 {
@@ -43,18 +42,23 @@ namespace RestauranteApp
 
         public void GuardarLayout(string filePath)
         {
-            //implementar logica 
-            /*var json = JsonConvert.SerializeObject(elementos, Formatting.Indented);
-            File.WriteAllText(filePath, json);*/
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Element>));
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                serializer.Serialize(writer, elementos);
+            }
         }
 
         public void CargarLayout(string filePath)
         {
             if (File.Exists(filePath))
             {
-                //implementar logica 
-                /*var json = File.ReadAllText(filePath);
-                elementos = JsonConvert.DeserializeObject<List<Elemento>>(json);*/
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Element>));
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    elementos = (List<Element>)serializer.Deserialize(reader);
+                }
             }
         }
     }
+}

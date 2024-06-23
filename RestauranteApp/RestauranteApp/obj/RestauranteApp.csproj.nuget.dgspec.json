@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Agustin\\Documents\\Repositorios\\Laburo\\TPI-Prog3\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj": {}
+    "C:\\Users\\cabre\\OneDrive\\Desktop\\Xd\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Agustin\\Documents\\Repositorios\\Laburo\\TPI-Prog3\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj": {
+    "C:\\Users\\cabre\\OneDrive\\Desktop\\Xd\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Agustin\\Documents\\Repositorios\\Laburo\\TPI-Prog3\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
+        "projectUniqueName": "C:\\Users\\cabre\\OneDrive\\Desktop\\Xd\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
         "projectName": "RestauranteApp",
-        "projectPath": "C:\\Users\\Agustin\\Documents\\Repositorios\\Laburo\\TPI-Prog3\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
-        "packagesPath": "C:\\Users\\Agustin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Agustin\\Documents\\Repositorios\\Laburo\\TPI-Prog3\\RestauranteApp\\RestauranteApp\\obj\\",
+        "projectPath": "C:\\Users\\cabre\\OneDrive\\Desktop\\Xd\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
+        "packagesPath": "C:\\Users\\cabre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cabre\\OneDrive\\Desktop\\Xd\\RestauranteApp\\RestauranteApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Agustin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\cabre\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -67,7 +67,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

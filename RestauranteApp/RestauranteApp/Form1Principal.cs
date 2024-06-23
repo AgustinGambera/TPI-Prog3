@@ -36,7 +36,7 @@ namespace RestauranteApp
             //Ocultamos todos los controles del main form. (Se superpone sino, con el modo edicion).
             btnModoEdicion.Visible = false;
             btnModoPrevisualizacion.Visible = false;
-            label1.Visible = false;  
+            label1.Visible = false;
             label2.Visible = false;
             label3.Visible = false;
             pictureBox1.Visible = false;
@@ -72,9 +72,24 @@ namespace RestauranteApp
             // Aquí decides qué hacer cuando el UserControl solicita volver al formulario principal
             modoEdicionControl.Visible = false;
             modoEdicionControl.Hide();                  // Oculta el ModoEdicionControl
-            
+
             this.WindowState = FormWindowState.Normal;  // Restaura el tamaño original del MainForm
 
+        }
+
+        // Boton "Cargar" para implementar la logica de cargar un disenio por XML
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Abre el diálogo para seleccionar un archivo XML
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "XML Files (*.xml)|*.xml";
+            
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Cargar el diseño desde el archivo XML usando LayoutManager
+                //modoEdicionControl.BotonCargar_Click(sender, e);
+            }
+            
         }
     }
 }

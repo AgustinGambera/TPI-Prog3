@@ -15,14 +15,22 @@ namespace RestauranteApp
         public Mozo Waiter { get; set; }
     }
 }
-
-    public class Cliente
+// Clases de dominio Cliente
+public class Cliente
     {
    
     }
 
-
-    public class Mozo
+// Clases de dominio Mozo
+public class Mozo
     {
        
     }
+
+// Clases de dominio Mesa
+public class Mesa
+{
+
+}
+
+

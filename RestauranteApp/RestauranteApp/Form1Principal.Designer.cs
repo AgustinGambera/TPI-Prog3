@@ -35,6 +35,7 @@
             label2 = new Label();
             pictureBox1 = new PictureBox();
             label3 = new Label();
+            CargarButton = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -43,9 +44,9 @@
             btnModoEdicion.BackColor = SystemColors.Info;
             btnModoEdicion.Cursor = Cursors.Hand;
             btnModoEdicion.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic);
-            btnModoEdicion.Location = new Point(12, 195);
+            btnModoEdicion.Location = new Point(12, 224);
             btnModoEdicion.Name = "btnModoEdicion";
-            btnModoEdicion.Size = new Size(243, 128);
+            btnModoEdicion.Size = new Size(243, 72);
             btnModoEdicion.TabIndex = 0;
             btnModoEdicion.Text = "Modo Edicion";
             btnModoEdicion.UseVisualStyleBackColor = false;
@@ -56,9 +57,9 @@
             btnModoPrevisualizacion.BackColor = SystemColors.Info;
             btnModoPrevisualizacion.Cursor = Cursors.Hand;
             btnModoPrevisualizacion.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic);
-            btnModoPrevisualizacion.Location = new Point(12, 359);
+            btnModoPrevisualizacion.Location = new Point(12, 314);
             btnModoPrevisualizacion.Name = "btnModoPrevisualizacion";
-            btnModoPrevisualizacion.Size = new Size(243, 132);
+            btnModoPrevisualizacion.Size = new Size(243, 70);
             btnModoPrevisualizacion.TabIndex = 1;
             btnModoPrevisualizacion.Text = "Previsualizacion";
             btnModoPrevisualizacion.UseVisualStyleBackColor = false;
@@ -109,12 +110,26 @@
             label3.TabIndex = 5;
             label3.Text = "↓ ↓ ↓ ↓";
             // 
+            // CargarButton
+            // 
+            CargarButton.BackColor = SystemColors.Info;
+            CargarButton.Cursor = Cursors.Hand;
+            CargarButton.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic);
+            CargarButton.Location = new Point(12, 402);
+            CargarButton.Name = "CargarButton";
+            CargarButton.Size = new Size(243, 70);
+            CargarButton.TabIndex = 6;
+            CargarButton.Text = "Cargar";
+            CargarButton.UseVisualStyleBackColor = false;
+            CargarButton.Click += button1_Click;
+            // 
             // Form1Principal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(192, 255, 192);
             ClientSize = new Size(960, 519);
+            Controls.Add(CargarButton);
             Controls.Add(label3);
             Controls.Add(pictureBox1);
             Controls.Add(label2);
@@ -137,5 +152,6 @@
         private Label label2;
         private PictureBox pictureBox1;
         private Label label3;
+        private Button CargarButton;
     }
 }
