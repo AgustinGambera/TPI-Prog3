@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cabre\\OneDrive\\Desktop\\Xd\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
+      "projectUniqueName": "C:\\Users\\cabre\\OneDrive\\Desktop\\Programing\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
       "projectName": "RestauranteApp",
-      "projectPath": "C:\\Users\\cabre\\OneDrive\\Desktop\\Xd\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
+      "projectPath": "C:\\Users\\cabre\\OneDrive\\Desktop\\Programing\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
       "packagesPath": "C:\\Users\\cabre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cabre\\OneDrive\\Desktop\\Xd\\RestauranteApp\\RestauranteApp\\obj\\",
+      "outputPath": "C:\\Users\\cabre\\OneDrive\\Desktop\\Programing\\RestauranteApp\\RestauranteApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

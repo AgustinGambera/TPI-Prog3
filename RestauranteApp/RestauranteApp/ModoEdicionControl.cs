@@ -39,6 +39,9 @@ namespace RestauranteApp
                 ItemsPicBox13,
                 ItemsPicBox14,
                 ItemsPicBox15,
+                ItemsPicBox16,
+                ItemsPicBox17,
+                ItemsPicBox18
             };
 
             // Asignar el evento MouseDown y MouseClick a cada PictureBox
@@ -66,17 +69,34 @@ namespace RestauranteApp
             }
         }
 
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            PictureBox pb = sender as PictureBox;
+            if (pb != null)
+            {
+                DataObject data = new DataObject();
+                data.SetData(DataFormats.Bitmap, pb.Image);
+                data.SetData("PictureBoxSize", pb.Size); // Agregar el tamaño del PictureBox al objeto DataObject
+                data.SetData("ImagePath", pb.Tag); // Agregar la ruta de la imagen al objeto DataObject
+                pb.DoDragDrop(data, DragDropEffects.Copy);
+            }
+        }
+
         private void PanelEdicion_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.Bitmap))
+            if (e.Data.GetDataPresent(DataFormats.Bitmap) && e.Data.GetDataPresent("PictureBoxSize") && e.Data.GetDataPresent("ImagePath"))
             {
                 Bitmap bmp = (Bitmap)e.Data.GetData(DataFormats.Bitmap);
+                Size originalSize = (Size)e.Data.GetData("PictureBoxSize"); // Obtener el tamaño original del PictureBox
+                string imagePath = (string)e.Data.GetData("ImagePath"); // Obtener la ruta de la imagen
+
                 PictureBox picBox = new PictureBox
                 {
                     Image = bmp,
                     Location = panelEdicion.PointToClient(new Point(e.X, e.Y)),
-                    Size = new Size(50, 50),
-                    SizeMode = PictureBoxSizeMode.StretchImage
+                    Size = originalSize, // Usar el tamaño original
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    Tag = imagePath // Configurar la ruta de la imagen en la propiedad Tag
                 };
 
                 // Añadir eventos para permitir mover el PictureBox dentro del panel
@@ -91,21 +111,18 @@ namespace RestauranteApp
                 Element nuevoElemento = new Element
                 {
                     Id = Guid.NewGuid(),
-                    ImageLocation = bmp, // Requiere modificar la clase Element para aceptar Bitmaps
+                    ImagePath = imagePath,
                     Position = picBox.Location
                 };
                 layoutManager.AgregarElemento(nuevoElemento);
             }
         }
 
-        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
-        {
-            PictureBox pb = sender as PictureBox;
-            if (pb != null)
-            {
-                pb.DoDragDrop(pb.Image, DragDropEffects.Copy);
-            }
-        }
+
+
+
+
+
 
         private void PictureBox_MouseDownForPanel(object sender, MouseEventArgs e)
         {
@@ -182,8 +199,10 @@ namespace RestauranteApp
             BackToMainFormRequested?.Invoke(this, EventArgs.Empty);
         }
 
+
         // Método para guardar el layout al presionar el botón Guardar
-        public void BotonGuardar_Click(object sender, EventArgs e)
+
+        private void botonGuardar_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "XML Files (*.xml)|*.xml";
@@ -193,41 +212,63 @@ namespace RestauranteApp
             }
         }
 
-
-        // Método para cargar el layout al presionar el botón Cargar
-        /*
-        public void BotonCargar_Click(object sender, EventArgs e)
+        // Boton cargar con la logica para cargar los elementos
+        private void botonCargar_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "XML Files (*.xml)|*.xml";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                layoutManager.CargarLayout(openFileDialog.FileName);
-
-                // Limpiar el panel antes de cargar
-                panelEdicion.Controls.Clear();
-
-                // Cargar los elementos desde el LayoutManager
-                foreach (var elemento in layoutManager.ObtenerElementos())
+                try
                 {
-                    PictureBox picBox = new PictureBox
+                    layoutManager.CargarLayout(openFileDialog.FileName);
+
+                    // Limpiar los PictureBox actuales
+                    panelEdicion.Controls.Clear();
+
+                    // Crear PictureBox para cada elemento cargado
+                    foreach (var elemento in layoutManager.ObtenerElementos())
                     {
-                        Image = elemento.ImageLocation, // Requiere modificar la clase Element para aceptar Bitmaps
-                        Location = elemento.Position,
-                        Size = new Size(50, 50),
-                        SizeMode = PictureBoxSizeMode.StretchImage
-                    };
+                        // Comprobar si ImagePath es válido
+                        if (!string.IsNullOrEmpty(elemento.ImagePath) && File.Exists(elemento.ImagePath))
+                        {
+                            try
+                            {
+                                PictureBox picBox = new PictureBox
+                                {
+                                    Image = Image.FromFile(elemento.ImagePath),
+                                    Location = elemento.Position,
+                                    Size = elemento.Size, // Usar el tamaño guardado
+                                    SizeMode = PictureBoxSizeMode.StretchImage,
+                                    Tag = elemento.ImagePath
+                                };
 
-                    // Añadir eventos para permitir mover el PictureBox dentro del panel
-                    picBox.MouseDown += PictureBox_MouseDownForPanel;
-                    picBox.MouseMove += PictureBox_MouseMoveForPanel;
-                    picBox.MouseUp += PictureBox_MouseUpForPanel;
-                    picBox.MouseClick += PictureBox_MouseClickForPanel; // Añadir evento para eliminar con clic derecho
+                                // Añadir eventos para permitir mover el PictureBox dentro del panel
+                                picBox.MouseDown += PictureBox_MouseDownForPanel;
+                                picBox.MouseMove += PictureBox_MouseMoveForPanel;
+                                picBox.MouseUp += PictureBox_MouseUpForPanel;
+                                picBox.MouseClick += PictureBox_MouseClickForPanel; // Añadir evento para eliminar con clic derecho
 
-                    panelEdicion.Controls.Add(picBox);
+                                panelEdicion.Controls.Add(picBox);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Error al cargar la imagen '{elemento.ImagePath}': {ex.Message}", "Error al cargar imagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"La ruta de la imagen '{elemento.ImagePath}' no es válida.", "Error al cargar imagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al cargar el layout: {ex.Message}", "Error al cargar layout", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
-        */
+
+
     }
 }

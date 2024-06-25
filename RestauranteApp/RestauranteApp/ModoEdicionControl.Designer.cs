@@ -30,6 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModoEdicionControl));
             panelHerramientas = new Panel();
+            ItemsPicBox18 = new PictureBox();
+            label18 = new Label();
+            ItemsPicBox17 = new PictureBox();
+            label17 = new Label();
+            ItemsPicBox16 = new PictureBox();
             ItemsPicBox15 = new PictureBox();
             ItemsPicBox14 = new PictureBox();
             ItemsPicBox13 = new PictureBox();
@@ -71,13 +76,16 @@
             ItemsPicBox2 = new PictureBox();
             ItemsPicBox1 = new PictureBox();
             label2 = new Label();
-            button2 = new Button();
+            botonGuardar = new Button();
             BotonInicioEdicion = new Button();
-            BotonPrevisualizacionEdicion = new Button();
             panelEdicion = new Panel();
             v = new Label();
             planoLabel = new Label();
+            botonCargar = new Button();
             panelHerramientas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ItemsPicBox18).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ItemsPicBox17).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ItemsPicBox16).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox13).BeginInit();
@@ -99,6 +107,11 @@
             // 
             panelHerramientas.BackColor = SystemColors.Info;
             panelHerramientas.BorderStyle = BorderStyle.FixedSingle;
+            panelHerramientas.Controls.Add(ItemsPicBox18);
+            panelHerramientas.Controls.Add(label18);
+            panelHerramientas.Controls.Add(ItemsPicBox17);
+            panelHerramientas.Controls.Add(label17);
+            panelHerramientas.Controls.Add(ItemsPicBox16);
             panelHerramientas.Controls.Add(ItemsPicBox15);
             panelHerramientas.Controls.Add(ItemsPicBox14);
             panelHerramientas.Controls.Add(ItemsPicBox13);
@@ -141,15 +154,66 @@
             panelHerramientas.Controls.Add(ItemsPicBox1);
             panelHerramientas.Location = new Point(1390, 80);
             panelHerramientas.Name = "panelHerramientas";
-            panelHerramientas.Size = new Size(457, 537);
+            panelHerramientas.Size = new Size(457, 805);
             panelHerramientas.TabIndex = 3;
+            // 
+            // ItemsPicBox18
+            // 
+            ItemsPicBox18.BorderStyle = BorderStyle.FixedSingle;
+            ItemsPicBox18.Cursor = Cursors.Hand;
+            ItemsPicBox18.Image = (Image)resources.GetObject("ItemsPicBox18.Image");
+            ItemsPicBox18.Location = new Point(216, 597);
+            ItemsPicBox18.Name = "ItemsPicBox18";
+            ItemsPicBox18.Size = new Size(50, 186);
+            ItemsPicBox18.TabIndex = 52;
+            ItemsPicBox18.TabStop = false;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(14, 503);
+            label18.Name = "label18";
+            label18.Size = new Size(36, 15);
+            label18.TabIndex = 51;
+            label18.Text = "Muro";
+            // 
+            // ItemsPicBox17
+            // 
+            ItemsPicBox17.BorderStyle = BorderStyle.FixedSingle;
+            ItemsPicBox17.Cursor = Cursors.Hand;
+            ItemsPicBox17.Image = (Image)resources.GetObject("ItemsPicBox17.Image");
+            ItemsPicBox17.Location = new Point(14, 521);
+            ItemsPicBox17.Name = "ItemsPicBox17";
+            ItemsPicBox17.Size = new Size(186, 50);
+            ItemsPicBox17.TabIndex = 50;
+            ItemsPicBox17.TabStop = false;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(11, 574);
+            label17.Name = "label17";
+            label17.Size = new Size(35, 15);
+            label17.TabIndex = 49;
+            label17.Text = "Mesa";
+            // 
+            // ItemsPicBox16
+            // 
+            ItemsPicBox16.BorderStyle = BorderStyle.FixedSingle;
+            ItemsPicBox16.Cursor = Cursors.Hand;
+            ItemsPicBox16.Image = (Image)resources.GetObject("ItemsPicBox16.Image");
+            ItemsPicBox16.Location = new Point(16, 592);
+            ItemsPicBox16.Name = "ItemsPicBox16";
+            ItemsPicBox16.Size = new Size(186, 191);
+            ItemsPicBox16.TabIndex = 48;
+            ItemsPicBox16.TabStop = false;
             // 
             // ItemsPicBox15
             // 
             ItemsPicBox15.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox15.Cursor = Cursors.Hand;
             ItemsPicBox15.Image = (Image)resources.GetObject("ItemsPicBox15.Image");
-            ItemsPicBox15.Location = new Point(348, 395);
+            ItemsPicBox15.Location = new Point(374, 733);
             ItemsPicBox15.Name = "ItemsPicBox15";
             ItemsPicBox15.Size = new Size(54, 50);
             ItemsPicBox15.TabIndex = 47;
@@ -160,7 +224,7 @@
             ItemsPicBox14.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox14.Cursor = Cursors.Hand;
             ItemsPicBox14.Image = (Image)resources.GetObject("ItemsPicBox14.Image");
-            ItemsPicBox14.Location = new Point(253, 395);
+            ItemsPicBox14.Location = new Point(279, 733);
             ItemsPicBox14.Name = "ItemsPicBox14";
             ItemsPicBox14.Size = new Size(54, 50);
             ItemsPicBox14.TabIndex = 46;
@@ -171,7 +235,7 @@
             ItemsPicBox13.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox13.Cursor = Cursors.Hand;
             ItemsPicBox13.Image = (Image)resources.GetObject("ItemsPicBox13.Image");
-            ItemsPicBox13.Location = new Point(148, 395);
+            ItemsPicBox13.Location = new Point(373, 567);
             ItemsPicBox13.Name = "ItemsPicBox13";
             ItemsPicBox13.Size = new Size(54, 50);
             ItemsPicBox13.TabIndex = 45;
@@ -182,7 +246,7 @@
             ItemsPicBox12.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox12.Cursor = Cursors.Hand;
             ItemsPicBox12.Image = (Image)resources.GetObject("ItemsPicBox12.Image");
-            ItemsPicBox12.Location = new Point(53, 395);
+            ItemsPicBox12.Location = new Point(278, 567);
             ItemsPicBox12.Name = "ItemsPicBox12";
             ItemsPicBox12.Size = new Size(54, 50);
             ItemsPicBox12.TabIndex = 44;
@@ -191,7 +255,7 @@
             // label25
             // 
             label25.AutoSize = true;
-            label25.Location = new Point(342, 306);
+            label25.Location = new Point(368, 644);
             label25.Name = "label25";
             label25.Size = new Size(73, 15);
             label25.TabIndex = 43;
@@ -202,7 +266,7 @@
             ItemsPicBox11.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox11.Cursor = Cursors.Hand;
             ItemsPicBox11.Image = (Image)resources.GetObject("ItemsPicBox11.Image");
-            ItemsPicBox11.Location = new Point(347, 324);
+            ItemsPicBox11.Location = new Point(373, 662);
             ItemsPicBox11.Name = "ItemsPicBox11";
             ItemsPicBox11.Size = new Size(54, 50);
             ItemsPicBox11.TabIndex = 42;
@@ -211,7 +275,7 @@
             // label28
             // 
             label28.AutoSize = true;
-            label28.Location = new Point(246, 306);
+            label28.Location = new Point(272, 644);
             label28.Name = "label28";
             label28.Size = new Size(67, 15);
             label28.TabIndex = 39;
@@ -222,7 +286,7 @@
             ItemsPicBox10.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox10.Cursor = Cursors.Hand;
             ItemsPicBox10.Image = (Image)resources.GetObject("ItemsPicBox10.Image");
-            ItemsPicBox10.Location = new Point(252, 324);
+            ItemsPicBox10.Location = new Point(278, 662);
             ItemsPicBox10.Name = "ItemsPicBox10";
             ItemsPicBox10.Size = new Size(54, 50);
             ItemsPicBox10.TabIndex = 38;
@@ -231,7 +295,7 @@
             // label22
             // 
             label22.AutoSize = true;
-            label22.Location = new Point(136, 306);
+            label22.Location = new Point(361, 478);
             label22.Name = "label22";
             label22.Size = new Size(68, 15);
             label22.TabIndex = 35;
@@ -242,7 +306,7 @@
             ItemsPicBox9.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox9.Cursor = Cursors.Hand;
             ItemsPicBox9.Image = (Image)resources.GetObject("ItemsPicBox9.Image");
-            ItemsPicBox9.Location = new Point(147, 324);
+            ItemsPicBox9.Location = new Point(372, 496);
             ItemsPicBox9.Name = "ItemsPicBox9";
             ItemsPicBox9.Size = new Size(54, 50);
             ItemsPicBox9.TabIndex = 34;
@@ -251,7 +315,7 @@
             // BloqueNegro
             // 
             BloqueNegro.AutoSize = true;
-            BloqueNegro.Location = new Point(39, 306);
+            BloqueNegro.Location = new Point(264, 478);
             BloqueNegro.Name = "BloqueNegro";
             BloqueNegro.Size = new Size(77, 15);
             BloqueNegro.TabIndex = 31;
@@ -262,7 +326,7 @@
             ItemsPicBox8.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox8.Cursor = Cursors.Hand;
             ItemsPicBox8.Image = (Image)resources.GetObject("ItemsPicBox8.Image");
-            ItemsPicBox8.Location = new Point(52, 324);
+            ItemsPicBox8.Location = new Point(277, 496);
             ItemsPicBox8.Name = "ItemsPicBox8";
             ItemsPicBox8.Size = new Size(54, 50);
             ItemsPicBox8.TabIndex = 30;
@@ -544,39 +608,29 @@
             label2.TabIndex = 30;
             label2.Text = "Herramientas";
             // 
-            // button2
+            // botonGuardar
             // 
-            button2.BackColor = SystemColors.Info;
-            button2.Font = new Font("Segoe UI", 21.75F);
-            button2.Location = new Point(1390, 881);
-            button2.Name = "button2";
-            button2.Size = new Size(457, 95);
-            button2.TabIndex = 33;
-            button2.Text = "Guardar";
-            button2.UseVisualStyleBackColor = false;
+            botonGuardar.BackColor = SystemColors.Info;
+            botonGuardar.Font = new Font("Segoe UI", 21.75F);
+            botonGuardar.Location = new Point(1552, 909);
+            botonGuardar.Name = "botonGuardar";
+            botonGuardar.Size = new Size(140, 69);
+            botonGuardar.TabIndex = 33;
+            botonGuardar.Text = "Guardar";
+            botonGuardar.UseVisualStyleBackColor = false;
+            botonGuardar.Click += botonGuardar_Click;
             // 
             // BotonInicioEdicion
             // 
             BotonInicioEdicion.BackColor = SystemColors.Info;
             BotonInicioEdicion.Font = new Font("Segoe UI", 21.75F);
-            BotonInicioEdicion.Location = new Point(1390, 767);
+            BotonInicioEdicion.Location = new Point(1708, 910);
             BotonInicioEdicion.Name = "BotonInicioEdicion";
-            BotonInicioEdicion.Size = new Size(457, 95);
+            BotonInicioEdicion.Size = new Size(139, 68);
             BotonInicioEdicion.TabIndex = 31;
             BotonInicioEdicion.Text = "Inicio";
             BotonInicioEdicion.UseVisualStyleBackColor = false;
             BotonInicioEdicion.Click += BotonInicioEdicion_Click;
-            // 
-            // BotonPrevisualizacionEdicion
-            // 
-            BotonPrevisualizacionEdicion.BackColor = SystemColors.Info;
-            BotonPrevisualizacionEdicion.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            BotonPrevisualizacionEdicion.Location = new Point(1390, 652);
-            BotonPrevisualizacionEdicion.Name = "BotonPrevisualizacionEdicion";
-            BotonPrevisualizacionEdicion.Size = new Size(457, 95);
-            BotonPrevisualizacionEdicion.TabIndex = 32;
-            BotonPrevisualizacionEdicion.Text = "Previsualizacion";
-            BotonPrevisualizacionEdicion.UseVisualStyleBackColor = false;
             // 
             // panelEdicion
             // 
@@ -607,23 +661,38 @@
             planoLabel.TabIndex = 35;
             planoLabel.Text = "(Arrastre los elementos)";
             // 
+            // botonCargar
+            // 
+            botonCargar.BackColor = SystemColors.Info;
+            botonCargar.Font = new Font("Segoe UI", 21.75F);
+            botonCargar.Location = new Point(1390, 910);
+            botonCargar.Name = "botonCargar";
+            botonCargar.Size = new Size(140, 69);
+            botonCargar.TabIndex = 36;
+            botonCargar.Text = "Cargar";
+            botonCargar.UseVisualStyleBackColor = false;
+            botonCargar.Click += botonCargar_Click;
+            // 
             // ModoEdicionControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(192, 255, 192);
+            Controls.Add(botonCargar);
             Controls.Add(planoLabel);
             Controls.Add(v);
             Controls.Add(panelEdicion);
-            Controls.Add(button2);
+            Controls.Add(botonGuardar);
             Controls.Add(BotonInicioEdicion);
-            Controls.Add(BotonPrevisualizacionEdicion);
             Controls.Add(label2);
             Controls.Add(panelHerramientas);
             Name = "ModoEdicionControl";
             Size = new Size(1940, 1055);
             panelHerramientas.ResumeLayout(false);
             panelHerramientas.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ItemsPicBox18).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ItemsPicBox17).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ItemsPicBox16).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox15).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox14).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox13).EndInit();
@@ -675,23 +744,28 @@
         private PictureBox ItemsPicBox2;
         private PictureBox ItemsPicBox1;
         private Label label2;
-        private Button button2;
+        private Button botonGuardar;
         private Button BotonInicioEdicion;
-        private Button BotonPrevisualizacionEdicion;
         private Panel panelEdicion;
         private Label v;
         private Label planoLabel;
-        private Label BloqueNegro;
-        private PictureBox ItemsPicBox8;
+        private PictureBox ItemsPicBox15;
+        private PictureBox ItemsPicBox14;
+        private PictureBox ItemsPicBox13;
+        private PictureBox ItemsPicBox12;
         private Label label25;
         private PictureBox ItemsPicBox11;
         private Label label28;
         private PictureBox ItemsPicBox10;
         private Label label22;
         private PictureBox ItemsPicBox9;
-        private PictureBox ItemsPicBox15;
-        private PictureBox ItemsPicBox14;
-        private PictureBox ItemsPicBox13;
-        private PictureBox ItemsPicBox12;
+        private Label BloqueNegro;
+        private PictureBox ItemsPicBox8;
+        private Label label18;
+        private PictureBox ItemsPicBox17;
+        private Label label17;
+        private PictureBox ItemsPicBox16;
+        private PictureBox ItemsPicBox18;
+        private Button botonCargar;
     }
 }

@@ -24,7 +24,7 @@ namespace RestauranteApp
             this.Controls.Add(modoEdicionControl);
             this.Controls.Add(modoPrevisualizacionControl);
 
-            // Configurar la visibilidad según el modo
+            // Configurar la blebilidad según el modo
             // Facilmente podemos decidir cuando mostrarlo o no.
             modoEdicionControl.Visible = false;
             modoPrevisualizacionControl.Visible = false;
@@ -40,6 +40,7 @@ namespace RestauranteApp
             label2.Visible = false;
             label3.Visible = false;
             pictureBox1.Visible = false;
+            
 
             this.WindowState = FormWindowState.Maximized;   //Maximizamos :)
 
@@ -66,6 +67,7 @@ namespace RestauranteApp
             label2.Visible = true;
             label3.Visible = true;
             pictureBox1.Visible = true;
+            
 
 
 
@@ -77,19 +79,7 @@ namespace RestauranteApp
 
         }
 
-        // Boton "Cargar" para implementar la logica de cargar un disenio por XML
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Abre el diálogo para seleccionar un archivo XML
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "XML Files (*.xml)|*.xml";
-            
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Cargar el diseño desde el archivo XML usando LayoutManager
-                //modoEdicionControl.BotonCargar_Click(sender, e);
-            }
-            
-        }
+       
+
     }
 }

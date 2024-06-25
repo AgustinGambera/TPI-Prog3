@@ -1,64 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
+﻿using RestauranteApp;
 using System.Xml.Serialization;
 
-namespace RestauranteApp
+public class LayoutManager
 {
-    public class LayoutManager
+    private List<Element> elementos;
+
+    public LayoutManager()
     {
-        private List<Element> elementos;
+        elementos = new List<Element>();
+    }
 
-        public LayoutManager()
+    public void AgregarElemento(Element elemento)
+    {
+        elementos.Add(elemento);
+    }
+
+    public void EliminarElemento(Element elemento)
+    {
+        elementos.Remove(elemento);
+    }
+
+    public List<Element> ObtenerElementos()
+    {
+        return elementos;
+    }
+
+    public void ActualizarPosicion(Element elemento, Point nuevaPosicion)
+    {
+        var elem = elementos.FirstOrDefault(e => e.Id == elemento.Id);
+        if (elem != null)
         {
-            elementos = new List<Element>();
+            elem.Position = nuevaPosicion;
         }
+    }
 
-        public void AgregarElemento(Element elemento)
+    public void GuardarLayout(string filePath)
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Element>));
+        using (StreamWriter writer = new StreamWriter(filePath))
         {
-            elementos.Add(elemento);
+            serializer.Serialize(writer, elementos);
         }
+    }
 
-        public void EliminarElemento(Element elemento)
+    public void CargarLayout(string filePath)
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Element>));
+        using (StreamReader reader = new StreamReader(filePath))
         {
-            elementos.Remove(elemento);
-        }
-
-        public List<Element> ObtenerElementos()
-        {
-            return elementos;
-        }
-
-        public void ActualizarPosicion(Element elemento, Point nuevaPosicion)
-        {
-            var elem = elementos.FirstOrDefault(e => e.Id == elemento.Id);
-            if (elem != null)
-            {
-                elem.Position = nuevaPosicion;
-            }
-        }
-
-        public void GuardarLayout(string filePath)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Element>));
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                serializer.Serialize(writer, elementos);
-            }
-        }
-
-        public void CargarLayout(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Element>));
-                using (StreamReader reader = new StreamReader(filePath))
-                {
-                    elementos = (List<Element>)serializer.Deserialize(reader);
-                }
-            }
+            elementos = (List<Element>)serializer.Deserialize(reader);
         }
     }
 }
