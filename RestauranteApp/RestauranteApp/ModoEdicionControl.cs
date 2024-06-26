@@ -140,6 +140,10 @@ namespace RestauranteApp
                 Point newLocation = selectedPictureBox.Location;
                 newLocation.X += e.X - offset.X;
                 newLocation.Y += e.Y - offset.Y;
+
+                newLocation.X = Math.Max(0, Math.Min(panelEdicion.Width - selectedPictureBox.Width, newLocation.X));
+                newLocation.Y = Math.Max(0, Math.Min(panelEdicion.Height - selectedPictureBox.Height, newLocation.Y));
+
                 selectedPictureBox.Location = newLocation;
 
                 // Actualizar la posición en el LayoutManager

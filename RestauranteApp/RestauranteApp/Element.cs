@@ -16,4 +16,21 @@ namespace RestauranteApp
             Id = Guid.NewGuid();
         }
     }
+
+    public class Cliente : Element //pase estas clases desde Reserva.cs
+    {
+
+    }
+
+    // Clases de dominio Mozo
+    public class Mozo : Element
+    {
+
+    }
+
+    // Clases de dominio Mesa
+    public class Mesa : Element
+    {
+
+    }
 }
