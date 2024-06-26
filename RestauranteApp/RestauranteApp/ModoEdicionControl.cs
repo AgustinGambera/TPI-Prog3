@@ -11,7 +11,7 @@ namespace RestauranteApp
     {
         private PictureBox selectedPictureBox;
         private Point offset;
-        public event EventHandler BackToMainFormRequested;
+        public event EventHandler? BackToMainFormRequested;
 
         private LayoutManager layoutManager;
 
