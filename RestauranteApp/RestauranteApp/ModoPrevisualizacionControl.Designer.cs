@@ -36,18 +36,22 @@
             btnCargarJSON = new Button();
             btnGuardarJson = new Button();
             btnGuardarXML = new Button();
-            botonInicioPreview = new Button();
+            menuStrip1 = new MenuStrip();
+            navegacionToolStripMenuItem = new ToolStripMenuItem();
+            inicioToolStripMenuItem = new ToolStripMenuItem();
+            edicionToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dgvDetallesMesa).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panelMesas
             // 
             panelMesas.BackColor = SystemColors.Info;
             panelMesas.BorderStyle = BorderStyle.FixedSingle;
-            panelMesas.Location = new Point(15, 18);
+            panelMesas.Location = new Point(12, 50);
             panelMesas.Name = "panelMesas";
             panelMesas.Size = new Size(600, 600);
-            panelMesas.TabIndex = 4;
+            panelMesas.TabIndex = 1;
             // 
             // dgvDetallesMesa
             // 
@@ -76,7 +80,9 @@
             dgvDetallesMesa.DefaultCellStyle = dataGridViewCellStyle2;
             dgvDetallesMesa.EnableHeadersVisualStyles = false;
             dgvDetallesMesa.GridColor = SystemColors.GrayText;
-            dgvDetallesMesa.Location = new Point(662, 18);
+            dgvDetallesMesa.Location = new Point(662, 50);
+            dgvDetallesMesa.MaximumSize = new Size(1225, 600);
+            dgvDetallesMesa.MinimumSize = new Size(853, 600);
             dgvDetallesMesa.Name = "dgvDetallesMesa";
             dgvDetallesMesa.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -88,72 +94,101 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dgvDetallesMesa.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvDetallesMesa.Size = new Size(853, 600);
-            dgvDetallesMesa.TabIndex = 5;
+            dgvDetallesMesa.TabIndex = 2;
             // 
             // btnCargarJSON
             // 
             btnCargarJSON.BackColor = Color.FromArgb(70, 130, 180);
             btnCargarJSON.FlatStyle = FlatStyle.Flat;
-            btnCargarJSON.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCargarJSON.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCargarJSON.ForeColor = Color.White;
-            btnCargarJSON.Location = new Point(1029, 548);
+            btnCargarJSON.Location = new Point(662, 656);
             btnCargarJSON.Name = "btnCargarJSON";
-            btnCargarJSON.Size = new Size(144, 45);
-            btnCargarJSON.TabIndex = 6;
+            btnCargarJSON.Size = new Size(276, 55);
+            btnCargarJSON.TabIndex = 4;
             btnCargarJSON.Text = "Cargar JSON";
             btnCargarJSON.UseVisualStyleBackColor = false;
+            btnCargarJSON.Click += btnCargarJSON_Click;
             // 
             // btnGuardarJson
             // 
+            btnGuardarJson.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnGuardarJson.BackColor = Color.FromArgb(70, 130, 180);
             btnGuardarJson.FlatStyle = FlatStyle.Flat;
             btnGuardarJson.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGuardarJson.ForeColor = Color.White;
-            btnGuardarJson.Location = new Point(662, 624);
+            btnGuardarJson.Location = new Point(1063, 656);
             btnGuardarJson.Name = "btnGuardarJson";
-            btnGuardarJson.Size = new Size(322, 55);
-            btnGuardarJson.TabIndex = 7;
+            btnGuardarJson.Size = new Size(223, 55);
+            btnGuardarJson.TabIndex = 2;
             btnGuardarJson.Text = "Guardar como JSON";
             btnGuardarJson.UseVisualStyleBackColor = false;
+            btnGuardarJson.Click += btnGuardarJson_Click;
             // 
             // btnGuardarXML
             // 
+            btnGuardarXML.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnGuardarXML.BackColor = Color.FromArgb(70, 130, 180);
             btnGuardarXML.FlatStyle = FlatStyle.Flat;
             btnGuardarXML.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGuardarXML.ForeColor = Color.White;
-            btnGuardarXML.Location = new Point(1182, 624);
+            btnGuardarXML.Location = new Point(1292, 656);
             btnGuardarXML.Name = "btnGuardarXML";
-            btnGuardarXML.Size = new Size(322, 55);
-            btnGuardarXML.TabIndex = 8;
+            btnGuardarXML.Size = new Size(223, 55);
+            btnGuardarXML.TabIndex = 3;
             btnGuardarXML.Text = "Guardar como XML";
             btnGuardarXML.UseVisualStyleBackColor = false;
+            btnGuardarXML.Click += btnGuardarXML_Click;
             // 
-            // botonInicioPreview
+            // menuStrip1
             // 
-            botonInicioPreview.Location = new Point(1019, 636);
-            botonInicioPreview.Name = "botonInicioPreview";
-            botonInicioPreview.Size = new Size(118, 36);
-            botonInicioPreview.TabIndex = 9;
-            botonInicioPreview.Text = "Inicio";
-            botonInicioPreview.UseVisualStyleBackColor = true;
-            botonInicioPreview.Click += botonInicioPreview_Click;
+            menuStrip1.BackColor = Color.FromArgb(240, 248, 255);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { navegacionToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1550, 24);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // navegacionToolStripMenuItem
+            // 
+            navegacionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { inicioToolStripMenuItem, edicionToolStripMenuItem });
+            navegacionToolStripMenuItem.Name = "navegacionToolStripMenuItem";
+            navegacionToolStripMenuItem.Size = new Size(82, 20);
+            navegacionToolStripMenuItem.Text = "Navegación";
+            // 
+            // inicioToolStripMenuItem
+            // 
+            inicioToolStripMenuItem.Name = "inicioToolStripMenuItem";
+            inicioToolStripMenuItem.Size = new Size(180, 22);
+            inicioToolStripMenuItem.Text = "Inicio";
+            inicioToolStripMenuItem.Click += inicioToolStripMenuItem_Click;
+            // 
+            // edicionToolStripMenuItem
+            // 
+            edicionToolStripMenuItem.Name = "edicionToolStripMenuItem";
+            edicionToolStripMenuItem.Size = new Size(180, 22);
+            edicionToolStripMenuItem.Text = "Edición";
+            edicionToolStripMenuItem.Click += edicionToolStripMenuItem_Click;
             // 
             // ModoPrevisualizacionControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(192, 255, 192);
-            Controls.Add(botonInicioPreview);
             Controls.Add(btnGuardarXML);
             Controls.Add(btnGuardarJson);
             Controls.Add(btnCargarJSON);
             Controls.Add(dgvDetallesMesa);
             Controls.Add(panelMesas);
+            Controls.Add(menuStrip1);
             Name = "ModoPrevisualizacionControl";
             Size = new Size(1550, 814);
             ((System.ComponentModel.ISupportInitialize)dgvDetallesMesa).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -163,6 +198,9 @@
         private Button btnCargarJSON;
         private Button btnGuardarJson;
         private Button btnGuardarXML;
-        private Button botonInicioPreview;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem navegacionToolStripMenuItem;
+        private ToolStripMenuItem inicioToolStripMenuItem;
+        private ToolStripMenuItem edicionToolStripMenuItem;
     }
 }

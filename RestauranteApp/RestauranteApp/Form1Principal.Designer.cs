@@ -35,6 +35,7 @@
             label2 = new Label();
             pictureBox1 = new PictureBox();
             label3 = new Label();
+            btnExit = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -109,18 +110,33 @@
             label3.TabIndex = 5;
             label3.Text = "↓ ↓ ↓ ↓";
             // 
+            // btnExit
+            // 
+            btnExit.BackColor = SystemColors.Info;
+            btnExit.Cursor = Cursors.Hand;
+            btnExit.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic);
+            btnExit.Location = new Point(12, 435);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(243, 72);
+            btnExit.TabIndex = 6;
+            btnExit.Text = "Salir";
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
+            // 
             // Form1Principal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(192, 255, 192);
             ClientSize = new Size(960, 519);
+            Controls.Add(btnExit);
             Controls.Add(label3);
             Controls.Add(pictureBox1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnModoPrevisualizacion);
             Controls.Add(btnModoEdicion);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Form1Principal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Restaurant Builder";
@@ -137,5 +153,6 @@
         private Label label2;
         private PictureBox pictureBox1;
         private Label label3;
+        private Button btnExit;
     }
 }

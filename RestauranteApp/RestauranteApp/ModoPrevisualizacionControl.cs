@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -15,25 +17,29 @@ namespace RestauranteApp
     public partial class ModoPrevisualizacionControl : UserControl
 
     {
+        private LayoutManager layoutManager;
+        private ModoEdicionControl modoEdicion;
         private List<Mesa> mesas;
         //Evento para volver al form principal mediante boton de inicio
         public event EventHandler? BackToMainFormRequested;
+        public event EventHandler? BackToEditFormRequested;
 
         public ModoPrevisualizacionControl()
         {
             InitializeComponent();
+            layoutManager = new LayoutManager();
             CargarMesas();
             MostrarMesas();
+            edicionToolStripMenuItem.Click += edicionToolStripMenuItem_Click;
         }
 
         private void CargarMesas()
         {
-            mesas = new List<Mesa>
+            mesas = layoutManager.ObtenerElementos().Where(e => e is Mesa).Select(e => (Mesa)e).ToList();
+            for (int i = 0; i < mesas.Count; i++)
             {
-                new Mesa { Numero = 1, Estado = "Libre", MozoEncargado = "Juan", Cliente = "N/A", Permanencia = "N/A", Consumos = "N/A" },
-                new Mesa { Numero = 2, Estado = "Ocupada", MozoEncargado = "Ana", Cliente = "Carlos", Permanencia = "30 min", Consumos = "2 bebidas" },
-                new Mesa { Numero = 3, Estado = "Reservada", MozoEncargado = "Luis", Cliente = "Matias", Permanencia = "N/A", Consumos = "N/A" }
-            };
+                mesas[i].Numero = i + 1;
+            }
         }
 
         private void MostrarMesas()
@@ -67,16 +73,21 @@ namespace RestauranteApp
             }
         }
 
+
         private void MostrarDetallesMesa(Mesa mesa)
         {
             var dt = new DataTable();
             dt.Columns.Add("Detalle");
             dt.Columns.Add("Información");
-            dt.Rows.Add("Número de Mesa", mesa.Numero);
+            dt.Rows.Add("Numero", mesa.Id);
+            //dt.Rows.Add("Ruta de Imagen", mesa.ImagePath);
+            //dt.Rows.Add("Posicion", mesa.Position);
+            //dt.Rows.Add("Tamaño", mesa.Size);
+            //dt.Rows.Add("Color", mesa.BackColor.ToString());
             dt.Rows.Add("Estado", mesa.Estado);
             dt.Rows.Add("Mozo Encargado", mesa.MozoEncargado);
             dt.Rows.Add("Cliente", mesa.Cliente);
-            dt.Rows.Add("Permanencia", mesa.Permanencia);
+            dt.Rows.Add("Permanendia", mesa.Permanencia);
             dt.Rows.Add("Consumos", mesa.Consumos);
             dgvDetallesMesa.DataSource = dt;
         }
@@ -133,6 +144,7 @@ namespace RestauranteApp
             LoadFromJSON();
         }
 
+
         private void LoadFromJSON()
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -141,14 +153,55 @@ namespace RestauranteApp
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string jsonString = File.ReadAllText(openFileDialog.FileName);
-                    mesas = JsonSerializer.Deserialize<List<Mesa>>(jsonString);
-                    MessageBox.Show("Datos cargados desde " + openFileDialog.FileName, "Cargar JSON", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    UpdateUIWithMesasData();
-                    MostrarMesas();
+                    try
+                    {
+                        var options = new JsonSerializerOptions
+                        {
+                            Converters = { new PointConverter(), new SizeConverter() }
+                        };
+                        string jsonString = File.ReadAllText(openFileDialog.FileName);
+                        var loadedMesas = JsonSerializer.Deserialize<List<Mesa>>(jsonString, options);
+
+                        if (loadedMesas != null)
+                        {
+                            mesas = loadedMesas;
+
+                            foreach (var mesa in mesas)
+                            {
+                                Element elemento = new Element
+                                {
+                                    Id = Guid.NewGuid(),
+                                    ImagePath = mesa.ImagePath,
+                                    Position = mesa.Position,
+                                    Size = mesa.Size,
+                                    Estado = mesa.Estado,
+                                    MozoEncargado = mesa.MozoEncargado,
+                                    Cliente = mesa.Cliente,
+                                    Permanencia = mesa.Permanencia,
+                                    Consumos = mesa.Consumos,
+                                    BackColor = mesa.BackColor
+                                };
+                                layoutManager.AgregarElemento(elemento);
+                            }
+
+                            MessageBox.Show("Datos cargados desde " + openFileDialog.FileName, "Cargar JSON", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            UpdateUIWithMesasData();
+                            MostrarMesas();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error al deserializar los datos.", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al cargar el archivo JSON: {ex.Message}", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
+
+
 
         private void UpdateUIWithMesasData()
         {
@@ -156,21 +209,27 @@ namespace RestauranteApp
             dgvDetallesMesa.DataSource = mesas;
         }
 
-       
 
-        public class Mesa
+
+        public class Mesa : Element
         {
             public int Numero { get; set; }
-            public string Estado { get; set; }
-            public string MozoEncargado { get; set; }
-            public string Cliente { get; set; }
-            public string Permanencia { get; set; }
-            public string Consumos { get; set; }
+            
         }
 
         private void botonInicioPreview_Click(object sender, EventArgs e)
         {
             BackToMainFormRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackToMainFormRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void edicionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackToEditFormRequested?.Invoke(this, EventArgs.Empty);
         }
     }
 }

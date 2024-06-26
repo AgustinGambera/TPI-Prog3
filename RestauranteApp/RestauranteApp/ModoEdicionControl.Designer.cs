@@ -82,6 +82,10 @@
             v = new Label();
             planoLabel = new Label();
             botonCargar = new Button();
+            menuStrip1 = new MenuStrip();
+            navegaciónToolStripMenuItem = new ToolStripMenuItem();
+            previsualizaciónToolStripMenuItem = new ToolStripMenuItem();
+            inicioToolStripMenuItem = new ToolStripMenuItem();
             panelHerramientas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox18).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox17).BeginInit();
@@ -101,6 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox1).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panelHerramientas
@@ -199,6 +204,7 @@
             // 
             // ItemsPicBox16
             // 
+            ItemsPicBox16.BackColor = SystemColors.Info;
             ItemsPicBox16.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox16.Cursor = Cursors.Hand;
             ItemsPicBox16.Image = (Image)resources.GetObject("ItemsPicBox16.Image");
@@ -207,6 +213,7 @@
             ItemsPicBox16.Size = new Size(186, 191);
             ItemsPicBox16.TabIndex = 48;
             ItemsPicBox16.TabStop = false;
+            ItemsPicBox16.MouseClick += PictureBox_MouseClick;
             // 
             // ItemsPicBox15
             // 
@@ -602,7 +609,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic);
-            label2.Location = new Point(1520, 10);
+            label2.Location = new Point(1527, 37);
             label2.Name = "label2";
             label2.Size = new Size(195, 40);
             label2.TabIndex = 30;
@@ -673,6 +680,36 @@
             botonCargar.UseVisualStyleBackColor = false;
             botonCargar.Click += botonCargar_Click;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { navegaciónToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1940, 24);
+            menuStrip1.TabIndex = 37;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // navegaciónToolStripMenuItem
+            // 
+            navegaciónToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { previsualizaciónToolStripMenuItem, inicioToolStripMenuItem });
+            navegaciónToolStripMenuItem.Name = "navegaciónToolStripMenuItem";
+            navegaciónToolStripMenuItem.Size = new Size(82, 20);
+            navegaciónToolStripMenuItem.Text = "Navegación";
+            // 
+            // previsualizaciónToolStripMenuItem
+            // 
+            previsualizaciónToolStripMenuItem.Name = "previsualizaciónToolStripMenuItem";
+            previsualizaciónToolStripMenuItem.Size = new Size(158, 22);
+            previsualizaciónToolStripMenuItem.Text = "Previsualización";
+            previsualizaciónToolStripMenuItem.Click += previsualizaciónToolStripMenuItem_Click;
+            // 
+            // inicioToolStripMenuItem
+            // 
+            inicioToolStripMenuItem.Name = "inicioToolStripMenuItem";
+            inicioToolStripMenuItem.Size = new Size(158, 22);
+            inicioToolStripMenuItem.Text = "Inicio";
+            inicioToolStripMenuItem.Click += inicioToolStripMenuItem_Click;
+            // 
             // ModoEdicionControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -686,6 +723,7 @@
             Controls.Add(BotonInicioEdicion);
             Controls.Add(label2);
             Controls.Add(panelHerramientas);
+            Controls.Add(menuStrip1);
             Name = "ModoEdicionControl";
             Size = new Size(1940, 1055);
             panelHerramientas.ResumeLayout(false);
@@ -708,6 +746,8 @@
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox1).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -767,5 +807,9 @@
         private PictureBox ItemsPicBox16;
         private PictureBox ItemsPicBox18;
         private Button botonCargar;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem navegaciónToolStripMenuItem;
+        private ToolStripMenuItem previsualizaciónToolStripMenuItem;
+        private ToolStripMenuItem inicioToolStripMenuItem;
     }
 }

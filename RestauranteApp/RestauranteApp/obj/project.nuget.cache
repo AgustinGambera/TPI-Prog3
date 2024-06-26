@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Dfts2WooeFynIcLn2S33xS2LwSNYNyni2cQ7m5iJhwKgVrFoxx0RB5x4Rtd72aG3+BxvdDJD88pWWhfNOJ1cBg==",
+  "dgSpecHash": "FhccIFOp3NVmLTq1FcRIXdAvmvLcz5UoRAH+XM5kyTFbufT+Jqns+7gyVBRGR8Zbaq8wdVb5BDNiv3kE+YnTAg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Agustin\\Documents\\Repositorios\\CambioSanti\\TPI-Prog3\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\TUP\\ReposVS\\Develop\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\franr\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

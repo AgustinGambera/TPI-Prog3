@@ -4,6 +4,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
+using Newtonsoft.Json;
 
 namespace RestauranteApp
 {
@@ -12,6 +14,7 @@ namespace RestauranteApp
         private PictureBox selectedPictureBox;
         private Point offset;
         public event EventHandler? BackToMainFormRequested;
+        public event EventHandler? BackToPreviewFormRequested;
 
         private LayoutManager layoutManager;
 
@@ -87,36 +90,44 @@ namespace RestauranteApp
             if (e.Data.GetDataPresent(DataFormats.Bitmap) && e.Data.GetDataPresent("PictureBoxSize") && e.Data.GetDataPresent("ImagePath"))
             {
                 Bitmap bmp = (Bitmap)e.Data.GetData(DataFormats.Bitmap);
-                Size originalSize = (Size)e.Data.GetData("PictureBoxSize"); // Obtener el tamaño original del PictureBox
-                string imagePath = (string)e.Data.GetData("ImagePath"); // Obtener la ruta de la imagen
+                Size originalSize = (Size)e.Data.GetData("PictureBoxSize");
+                string imagePath = (string)e.Data.GetData("ImagePath");
 
                 PictureBox picBox = new PictureBox
                 {
                     Image = bmp,
                     Location = panelEdicion.PointToClient(new Point(e.X, e.Y)),
-                    Size = originalSize, // Usar el tamaño original
+                    Size = originalSize,
                     SizeMode = PictureBoxSizeMode.StretchImage,
-                    Tag = imagePath // Configurar la ruta de la imagen en la propiedad Tag
+                    Tag = Guid.NewGuid(), // Asigna un nuevo GUID como Tag
+                    BackColor = Color.FromArgb(255, 255, 225)
                 };
 
-                // Añadir eventos para permitir mover el PictureBox dentro del panel
                 picBox.MouseDown += PictureBox_MouseDownForPanel;
                 picBox.MouseMove += PictureBox_MouseMoveForPanel;
                 picBox.MouseUp += PictureBox_MouseUpForPanel;
-                picBox.MouseClick += PictureBox_MouseClickForPanel; // Añadir evento para eliminar con clic derecho
+                picBox.MouseClick += PictureBox_MouseClickForPanel;
 
                 panelEdicion.Controls.Add(picBox);
 
-                // Agregar el nuevo elemento al LayoutManager
                 Element nuevoElemento = new Element
                 {
-                    Id = Guid.NewGuid(),
+                    Id = (Guid)picBox.Tag, // Usa el mismo GUID
                     ImagePath = imagePath,
-                    Position = picBox.Location
+                    Position = picBox.Location,
+                    Size = originalSize,
+                    Estado = "Libre",
+                    MozoEncargado = "N/A",
+                    Cliente = "N/A",
+                    Permanencia = "N/A",
+                    Consumos = "N/A",
+                    BackColor = Color.FromArgb(255, 255, 225)
                 };
+
                 layoutManager.AgregarElemento(nuevoElemento);
             }
         }
+
 
 
 
@@ -143,7 +154,7 @@ namespace RestauranteApp
                 selectedPictureBox.Location = newLocation;
 
                 // Actualizar la posición en el LayoutManager
-                var elemento = layoutManager.ObtenerElementos().FirstOrDefault(el => el.Position == selectedPictureBox.Location);
+                var elemento = layoutManager.ObtenerElementos().FirstOrDefault(el => el.Id == (Guid)selectedPictureBox.Tag);
                 if (elemento != null)
                 {
                     layoutManager.ActualizarPosicion(elemento, newLocation);
@@ -161,26 +172,37 @@ namespace RestauranteApp
 
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
+            PictureBox pb = sender as PictureBox;
             if (e.Button == MouseButtons.Right)
             {
-                // Eliminar el PictureBox del panel
-                PictureBox pb = sender as PictureBox;
+                // Eliminar el PictureBox al hacer clic con el botón derecho
+               
                 if (pb != null)
                 {
                     this.Controls.Remove(pb);
                     pb.Dispose();
+
+                    var elemento = layoutManager.ObtenerElementos().FirstOrDefault(el => el.Position == pb.Location);
+                    if (elemento != null)
+                    {
+                        layoutManager.EliminarElemento(elemento);
+                    }
                 }
+            }
+            else if(e.Button == MouseButtons.Left)
+            {
+                pb.BackColor = Color.Red;
             }
         }
 
         private void PictureBox_MouseClickForPanel(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            PictureBox pb = sender as PictureBox;
+            if (pb != null)
             {
-                // Eliminar el PictureBox del panel
-                PictureBox pb = sender as PictureBox;
-                if (pb != null)
+                if (e.Button == MouseButtons.Right)
                 {
+                    // Eliminar el PictureBox del panel
                     panelEdicion.Controls.Remove(pb);
                     pb.Dispose();
 
@@ -191,8 +213,49 @@ namespace RestauranteApp
                         layoutManager.EliminarElemento(elemento);
                     }
                 }
+                else if (e.Button == MouseButtons.Left)
+                {
+                    // Cambiar el color de fondo del PictureBox
+                    if (pb.BackColor == Color.FromArgb(255, 99, 71))
+                    {
+                        pb.BackColor = Color.FromArgb(255, 165, 0);
+                    }
+                    else if (pb.BackColor == Color.FromArgb(255, 165, 0))
+                    {
+                        pb.BackColor = Color.FromArgb(144, 238, 144);
+                    }
+                    else // por defecto, o en caso de Green
+                    {
+                        pb.BackColor = Color.FromArgb(255, 99, 71);
+                    }
+
+                    // Actualizar el BackColor del elemento en el LayoutManager
+                    var elemento = layoutManager.ObtenerElementos().FirstOrDefault(el => el.Position == pb.Location);
+                    if (elemento != null)
+                    {
+                        elemento.BackColor = pb.BackColor;
+
+                        // Actualizar el estado del elemento en función del color de fondo
+                        if (elemento.BackColor == Color.FromArgb(255, 99, 71))
+                        {
+                            elemento.Estado = "Ocupada";
+                        }
+                        else if (elemento.BackColor == Color.FromArgb(255, 165, 0))
+                        {
+                            elemento.Estado = "Reservado";
+                        }
+                        else if (elemento.BackColor == Color.FromArgb(144, 238, 144))
+                        {
+                            elemento.Estado = "Libre";
+                        }
+
+                        MessageBox.Show($"Nuevo color: {pb.BackColor}");
+                    }
+                }
             }
         }
+
+
 
         public void BotonInicioEdicion_Click(object sender, EventArgs e)
         {
@@ -205,61 +268,91 @@ namespace RestauranteApp
         private void botonGuardar_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "XML Files (*.xml)|*.xml";
+            saveFileDialog.Filter = "JSON Files (*.json)|*.json";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                layoutManager.GuardarLayout(saveFileDialog.FileName);
+                try
+                {
+                    var elementos = layoutManager.ObtenerElementos();
+
+                    // Convertir elementos a una lista de objetos anónimos para la serialización
+                    var elementosSerializables = elementos.Select(el => new
+                    {
+                        Id = el.Id,
+                        ImagePath = el.ImagePath,
+                        Position = el.Position,
+                        Size = el.Size,
+                        BackColor = new { el.BackColor.R, el.BackColor.G, el.BackColor.B, el.BackColor.A }, // Guardar los componentes del color
+                        Estado = el.Estado,
+                        MozoEncargado = el.MozoEncargado,
+                        Cliente = el.Cliente,
+                        Permanencia = el.Permanencia,
+                        Consumos = el.Consumos
+                    }).ToList();
+
+                    string json = JsonConvert.SerializeObject(elementosSerializables, Newtonsoft.Json.Formatting.Indented);
+                    File.WriteAllText(saveFileDialog.FileName, json);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al guardar el layout: {ex.Message}", "Error al guardar layout", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
 
         // Boton cargar con la logica para cargar los elementos
         private void botonCargar_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "XML Files (*.xml)|*.xml";
+            openFileDialog.Filter = "JSON Files (*.json)|*.json";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    layoutManager.CargarLayout(openFileDialog.FileName);
+                    string json = File.ReadAllText(openFileDialog.FileName);
+                    var elementosSerializables = JsonConvert.DeserializeObject<List<dynamic>>(json);
 
                     // Limpiar los PictureBox actuales
                     panelEdicion.Controls.Clear();
 
-                    // Crear PictureBox para cada elemento cargado
-                    foreach (var elemento in layoutManager.ObtenerElementos())
+                    foreach (var el in elementosSerializables)
                     {
-                        // Comprobar si ImagePath es válido
-                        if (!string.IsNullOrEmpty(elemento.ImagePath) && File.Exists(elemento.ImagePath))
+                        // Convertir el objeto dinámico a un Element
+                        Element elemento = new Element
                         {
-                            try
-                            {
-                                PictureBox picBox = new PictureBox
-                                {
-                                    Image = Image.FromFile(elemento.ImagePath),
-                                    Location = elemento.Position,
-                                    Size = elemento.Size, // Usar el tamaño guardado
-                                    SizeMode = PictureBoxSizeMode.StretchImage,
-                                    Tag = elemento.ImagePath
-                                };
+                            Id = el.Id,
+                            ImagePath = el.ImagePath,
+                            Position = el.Position.ToObject<Point>(),
+                            Size = el.Size.ToObject<Size>(),
+                            BackColor = Color.FromArgb(el.BackColor.A, el.BackColor.R, el.BackColor.G, el.BackColor.B),
+                            Estado = el.Estado,
+                            MozoEncargado = el.MozoEncargado,
+                            Cliente = el.Cliente,
+                            Permanencia = el.Permanencia,
+                            Consumos = el.Consumos
+                        };
 
-                                // Añadir eventos para permitir mover el PictureBox dentro del panel
-                                picBox.MouseDown += PictureBox_MouseDownForPanel;
-                                picBox.MouseMove += PictureBox_MouseMoveForPanel;
-                                picBox.MouseUp += PictureBox_MouseUpForPanel;
-                                picBox.MouseClick += PictureBox_MouseClickForPanel; // Añadir evento para eliminar con clic derecho
-
-                                panelEdicion.Controls.Add(picBox);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show($"Error al cargar la imagen '{elemento.ImagePath}': {ex.Message}", "Error al cargar imagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                        else
+                        // Crear PictureBox para cada elemento cargado
+                        PictureBox picBox = new PictureBox
                         {
-                            MessageBox.Show($"La ruta de la imagen '{elemento.ImagePath}' no es válida.", "Error al cargar imagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            Image = Image.FromFile(elemento.ImagePath),
+                            Location = elemento.Position,
+                            Size = elemento.Size,
+                            SizeMode = PictureBoxSizeMode.StretchImage,
+                            Tag = elemento.ImagePath,
+                            BackColor = elemento.BackColor
+                        };
+
+                        picBox.MouseDown += PictureBox_MouseDownForPanel;
+                        picBox.MouseMove += PictureBox_MouseMoveForPanel;
+                        picBox.MouseUp += PictureBox_MouseUpForPanel;
+                        picBox.MouseClick += PictureBox_MouseClickForPanel;
+
+                        panelEdicion.Controls.Add(picBox);
+
+                        // Agregar el elemento al LayoutManager
+                        layoutManager.AgregarElemento(elemento);
                     }
                 }
                 catch (Exception ex)
@@ -270,5 +363,16 @@ namespace RestauranteApp
         }
 
 
+        private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackToMainFormRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void previsualizaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackToPreviewFormRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+       
     }
 }
