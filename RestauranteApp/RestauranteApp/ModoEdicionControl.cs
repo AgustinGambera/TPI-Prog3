@@ -4,27 +4,42 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml;
-using Newtonsoft.Json;
+using Newtonsoft.Json; // Biblioteca para la serialización y deserialización JSON
 
 namespace RestauranteApp
 {
     public partial class ModoEdicionControl : UserControl
     {
+        // Timer para distinguir entre clic y arrastre
+        private System.Windows.Forms.Timer clickTimer;
+        // PictureBox seleccionado para el arrastre
         private PictureBox selectedPictureBox;
+        // Offset para calcular la nueva posición durante el arrastre
         private Point offset;
+        // Eventos para navegar entre formularios
         public event EventHandler? BackToMainFormRequested;
         public event EventHandler? BackToPreviewFormRequested;
 
+        // Booleano para controlar si se está arrastrando un elemento
+        private bool isDragging;
+        // Umbral de tiempo para distinguir entre clic y arrastre
+        private const int ClickThreshold = 200;
+
+        // Gestor de diseño para manejar los elementos en el panel
         private LayoutManager layoutManager;
 
         public ModoEdicionControl()
         {
             InitializeComponent();
 
+            // Inicializar el Timer
+            clickTimer = new System.Windows.Forms.Timer();
+            clickTimer.Interval = ClickThreshold;
+            clickTimer.Tick += ClickTimer_Tick;
+
             layoutManager = new LayoutManager();
 
-            // Colección de PictureBox
+            // Colección de PictureBox para los elementos
             List<PictureBox> pictureBoxes = new List<PictureBox>
             {
                 ItemsPicBox1,
@@ -34,20 +49,12 @@ namespace RestauranteApp
                 ItemsPicBox5,
                 ItemsPicBox6,
                 ItemsPicBox7,
-                ItemsPicBox8,
-                ItemsPicBox9,
-                ItemsPicBox10,
-                ItemsPicBox11,
-                ItemsPicBox12,
-                ItemsPicBox13,
-                ItemsPicBox14,
-                ItemsPicBox15,
                 ItemsPicBox16,
                 ItemsPicBox17,
                 ItemsPicBox18
             };
 
-            // Asignar el evento MouseDown y MouseClick a cada PictureBox
+            // Asignar los eventos MouseDown y MouseClick a cada PictureBox
             foreach (var pb in pictureBoxes)
             {
                 pb.MouseDown += PictureBox_MouseDown;
@@ -60,18 +67,21 @@ namespace RestauranteApp
             panelEdicion.DragDrop += PanelEdicion_DragDrop;
         }
 
+        // Evento que se dispara cuando se entra un objeto arrastrado en el panel
         private void PanelEdicion_DragEnter(object sender, DragEventArgs e)
         {
+            // Verificar si el objeto arrastrado es una imagen
             if (e.Data.GetDataPresent(DataFormats.Bitmap))
             {
-                e.Effect = DragDropEffects.Copy;
+                e.Effect = DragDropEffects.Copy; // Permitir la acción de copiar
             }
             else
             {
-                e.Effect = DragDropEffects.None;
+                e.Effect = DragDropEffects.None; // No permitir ninguna acción
             }
         }
 
+        // Evento que se dispara cuando se presiona el botón del mouse en un PictureBox
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             PictureBox pb = sender as PictureBox;
@@ -81,35 +91,41 @@ namespace RestauranteApp
                 data.SetData(DataFormats.Bitmap, pb.Image);
                 data.SetData("PictureBoxSize", pb.Size); // Agregar el tamaño del PictureBox al objeto DataObject
                 data.SetData("ImagePath", pb.Tag); // Agregar la ruta de la imagen al objeto DataObject
-                pb.DoDragDrop(data, DragDropEffects.Copy);
+                pb.DoDragDrop(data, DragDropEffects.Copy); // Iniciar el arrastre con el efecto de copiar
             }
         }
 
+        // Evento que se dispara cuando se suelta un objeto arrastrado en el panel
         private void PanelEdicion_DragDrop(object sender, DragEventArgs e)
         {
+            // Verificar si el objeto arrastrado contiene una imagen y la información adicional
             if (e.Data.GetDataPresent(DataFormats.Bitmap) && e.Data.GetDataPresent("PictureBoxSize") && e.Data.GetDataPresent("ImagePath"))
             {
                 Bitmap bmp = (Bitmap)e.Data.GetData(DataFormats.Bitmap);
                 Size originalSize = (Size)e.Data.GetData("PictureBoxSize");
                 string imagePath = (string)e.Data.GetData("ImagePath");
 
+                // Crear un nuevo PictureBox con la imagen arrastrada
                 PictureBox picBox = new PictureBox
                 {
                     Image = bmp,
-                    Location = panelEdicion.PointToClient(new Point(e.X, e.Y)),
+                    Location = panelEdicion.PointToClient(new Point(e.X, e.Y)), // Establecer la ubicación en el panel
                     Size = originalSize,
                     SizeMode = PictureBoxSizeMode.StretchImage,
-                    Tag = Guid.NewGuid(), // Asigna un nuevo GUID como Tag
-                    BackColor = Color.FromArgb(255, 255, 225)
+                    Tag = Guid.NewGuid(), // Asignar un nuevo GUID como Tag
+                    BackColor = Color.FromArgb(255, 255, 225) // Color de fondo inicial
                 };
 
+                // Asignar los eventos de manejo al nuevo PictureBox
                 picBox.MouseDown += PictureBox_MouseDownForPanel;
                 picBox.MouseMove += PictureBox_MouseMoveForPanel;
                 picBox.MouseUp += PictureBox_MouseUpForPanel;
                 picBox.MouseClick += PictureBox_MouseClickForPanel;
 
+                // Agregar el nuevo PictureBox al panel de edición
                 panelEdicion.Controls.Add(picBox);
 
+                // Crear un nuevo elemento y agregarlo al LayoutManager
                 Element nuevoElemento = new Element
                 {
                     Id = (Guid)picBox.Tag, // Usa el mismo GUID
@@ -128,30 +144,28 @@ namespace RestauranteApp
             }
         }
 
-
-
-
-
-
-
-
+        // Evento que se dispara cuando se presiona el botón del mouse en un PictureBox del panel de edición
         private void PictureBox_MouseDownForPanel(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                selectedPictureBox = sender as PictureBox;
-                offset = new Point(e.X, e.Y);
+                selectedPictureBox = sender as PictureBox; // Establecer el PictureBox seleccionado
+                offset = new Point(e.X, e.Y); // Establecer el offset para el arrastre
+                isDragging = false; // Inicialmente no se está arrastrando
+                clickTimer.Start(); // Iniciar el Timer para distinguir entre clic y arrastre
             }
         }
 
+        // Evento que se dispara cuando se mueve el mouse sobre un PictureBox del panel de edición
         private void PictureBox_MouseMoveForPanel(object sender, MouseEventArgs e)
         {
             if (selectedPictureBox != null)
             {
+                isDragging = true; // Se detectó un arrastre
                 Point newLocation = selectedPictureBox.Location;
                 newLocation.X += e.X - offset.X;
                 newLocation.Y += e.Y - offset.Y;
-                selectedPictureBox.Location = newLocation;
+                selectedPictureBox.Location = newLocation; // Actualizar la ubicación del PictureBox
 
                 // Actualizar la posición en el LayoutManager
                 var elemento = layoutManager.ObtenerElementos().FirstOrDefault(el => el.Id == (Guid)selectedPictureBox.Tag);
@@ -162,26 +176,29 @@ namespace RestauranteApp
             }
         }
 
+        // Evento que se dispara cuando se suelta el botón del mouse en un PictureBox del panel de edición
         private void PictureBox_MouseUpForPanel(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                selectedPictureBox = null;
+                clickTimer.Stop(); // Detener el Timer
+                selectedPictureBox = null; // Deseleccionar el PictureBox
             }
         }
 
+        // Evento que se dispara cuando se hace clic en un PictureBox
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             PictureBox pb = sender as PictureBox;
             if (e.Button == MouseButtons.Right)
             {
                 // Eliminar el PictureBox al hacer clic con el botón derecho
-               
                 if (pb != null)
                 {
                     this.Controls.Remove(pb);
                     pb.Dispose();
 
+                    // Eliminar el elemento correspondiente del LayoutManager
                     var elemento = layoutManager.ObtenerElementos().FirstOrDefault(el => el.Position == pb.Location);
                     if (elemento != null)
                     {
@@ -189,33 +206,22 @@ namespace RestauranteApp
                     }
                 }
             }
-            else if(e.Button == MouseButtons.Left)
+            else if (e.Button == MouseButtons.Left)
             {
-                pb.BackColor = Color.Red;
+                pb.BackColor = Color.Red; // Cambiar el color de fondo al hacer clic con el botón izquierdo
             }
         }
 
+        // Evento que se dispara cuando se hace clic en un PictureBox del panel de edición
         private void PictureBox_MouseClickForPanel(object sender, MouseEventArgs e)
         {
-            PictureBox pb = sender as PictureBox;
-            if (pb != null)
+            if (e.Button == MouseButtons.Left && !isDragging)
             {
-                if (e.Button == MouseButtons.Right)
+                // Cambiar el color de fondo del PictureBox solo si no se está arrastrando
+                PictureBox pb = sender as PictureBox;
+                if (pb != null)
                 {
-                    // Eliminar el PictureBox del panel
-                    panelEdicion.Controls.Remove(pb);
-                    pb.Dispose();
-
-                    // Eliminar el elemento del LayoutManager
-                    var elemento = layoutManager.ObtenerElementos().FirstOrDefault(el => el.Position == pb.Location);
-                    if (elemento != null)
-                    {
-                        layoutManager.EliminarElemento(elemento);
-                    }
-                }
-                else if (e.Button == MouseButtons.Left)
-                {
-                    // Cambiar el color de fondo del PictureBox
+                    // Cambiar el color de fondo del PictureBox cíclicamente
                     if (pb.BackColor == Color.FromArgb(255, 99, 71))
                     {
                         pb.BackColor = Color.FromArgb(255, 165, 0);
@@ -255,16 +261,19 @@ namespace RestauranteApp
             }
         }
 
-
-
-        public void BotonInicioEdicion_Click(object sender, EventArgs e)
+        // Evento que se dispara cuando el Timer de clic ha alcanzado el umbral
+        private void ClickTimer_Tick(object sender, EventArgs e)
         {
-            BackToMainFormRequested?.Invoke(this, EventArgs.Empty);
+            clickTimer.Stop(); // Detener el Timer cuando el tiempo umbral ha pasado
         }
 
+        // Evento para manejar el clic en el botón de inicio de edición
+        public void BotonInicioEdicion_Click(object sender, EventArgs e)
+        {
+            BackToMainFormRequested?.Invoke(this, EventArgs.Empty); // Invocar el evento para regresar al formulario principal
+        }
 
-        // Método para guardar el layout al presionar el botón Guardar
-
+        // Método para guardar el diseño al presionar el botón Guardar
         private void botonGuardar_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -290,8 +299,9 @@ namespace RestauranteApp
                         Consumos = el.Consumos
                     }).ToList();
 
+                    // Serializar la lista de elementos a JSON
                     string json = JsonConvert.SerializeObject(elementosSerializables, Newtonsoft.Json.Formatting.Indented);
-                    File.WriteAllText(saveFileDialog.FileName, json);
+                    File.WriteAllText(saveFileDialog.FileName, json); // Escribir el JSON a un archivo
                 }
                 catch (Exception ex)
                 {
@@ -300,8 +310,7 @@ namespace RestauranteApp
             }
         }
 
-
-        // Boton cargar con la logica para cargar los elementos
+        // Botón para cargar el diseño desde un archivo JSON
         private void botonCargar_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -344,11 +353,13 @@ namespace RestauranteApp
                             BackColor = elemento.BackColor
                         };
 
+                        // Asignar los eventos de manejo al PictureBox
                         picBox.MouseDown += PictureBox_MouseDownForPanel;
                         picBox.MouseMove += PictureBox_MouseMoveForPanel;
                         picBox.MouseUp += PictureBox_MouseUpForPanel;
                         picBox.MouseClick += PictureBox_MouseClickForPanel;
 
+                        // Agregar el PictureBox al panel de edición
                         panelEdicion.Controls.Add(picBox);
 
                         // Agregar el elemento al LayoutManager
@@ -362,17 +373,16 @@ namespace RestauranteApp
             }
         }
 
-
+        // Evento para manejar el clic en el menú de inicio
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BackToMainFormRequested?.Invoke(this, EventArgs.Empty);
+            BackToMainFormRequested?.Invoke(this, EventArgs.Empty); // Invocar el evento para regresar al formulario principal
         }
 
+        // Evento para manejar el clic en el menú de previsualización
         private void previsualizaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BackToPreviewFormRequested?.Invoke(this, EventArgs.Empty);
+            BackToPreviewFormRequested?.Invoke(this, EventArgs.Empty); // Invocar el evento para ir al formulario de previsualización
         }
-
-       
     }
 }

@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "FhccIFOp3NVmLTq1FcRIXdAvmvLcz5UoRAH+XM5kyTFbufT+Jqns+7gyVBRGR8Zbaq8wdVb5BDNiv3kE+YnTAg==",
+  "dgSpecHash": "/0pru0eZuBM=",
   "success": true,
-  "projectFilePath": "D:\\TUP\\ReposVS\\Develop\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
+  "projectFilePath": "C:\\Users\\Estudiante\\OneDrive\\Escritorio\\Santi\\FrancoGit\\RestauranteApp\\RestauranteApp\\RestauranteApp.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\franr\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\Estudiante\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

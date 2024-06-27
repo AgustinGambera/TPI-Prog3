@@ -35,18 +35,6 @@
             ItemsPicBox17 = new PictureBox();
             label17 = new Label();
             ItemsPicBox16 = new PictureBox();
-            ItemsPicBox15 = new PictureBox();
-            ItemsPicBox14 = new PictureBox();
-            ItemsPicBox13 = new PictureBox();
-            ItemsPicBox12 = new PictureBox();
-            label25 = new Label();
-            ItemsPicBox11 = new PictureBox();
-            label28 = new Label();
-            ItemsPicBox10 = new PictureBox();
-            label22 = new Label();
-            ItemsPicBox9 = new PictureBox();
-            BloqueNegro = new Label();
-            ItemsPicBox8 = new PictureBox();
             label14 = new Label();
             label15 = new Label();
             label16 = new Label();
@@ -82,22 +70,10 @@
             v = new Label();
             planoLabel = new Label();
             botonCargar = new Button();
-            menuStrip1 = new MenuStrip();
-            navegaciónToolStripMenuItem = new ToolStripMenuItem();
-            previsualizaciónToolStripMenuItem = new ToolStripMenuItem();
-            inicioToolStripMenuItem = new ToolStripMenuItem();
             panelHerramientas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox18).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox17).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox16).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox15).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox14).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox13).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox12).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox11).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox5).BeginInit();
@@ -105,7 +81,6 @@
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox1).BeginInit();
-            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panelHerramientas
@@ -117,18 +92,6 @@
             panelHerramientas.Controls.Add(ItemsPicBox17);
             panelHerramientas.Controls.Add(label17);
             panelHerramientas.Controls.Add(ItemsPicBox16);
-            panelHerramientas.Controls.Add(ItemsPicBox15);
-            panelHerramientas.Controls.Add(ItemsPicBox14);
-            panelHerramientas.Controls.Add(ItemsPicBox13);
-            panelHerramientas.Controls.Add(ItemsPicBox12);
-            panelHerramientas.Controls.Add(label25);
-            panelHerramientas.Controls.Add(ItemsPicBox11);
-            panelHerramientas.Controls.Add(label28);
-            panelHerramientas.Controls.Add(ItemsPicBox10);
-            panelHerramientas.Controls.Add(label22);
-            panelHerramientas.Controls.Add(ItemsPicBox9);
-            panelHerramientas.Controls.Add(BloqueNegro);
-            panelHerramientas.Controls.Add(ItemsPicBox8);
             panelHerramientas.Controls.Add(label14);
             panelHerramientas.Controls.Add(label15);
             panelHerramientas.Controls.Add(label16);
@@ -167,7 +130,7 @@
             ItemsPicBox18.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox18.Cursor = Cursors.Hand;
             ItemsPicBox18.Image = (Image)resources.GetObject("ItemsPicBox18.Image");
-            ItemsPicBox18.Location = new Point(216, 597);
+            ItemsPicBox18.Location = new Point(216, 355);
             ItemsPicBox18.Name = "ItemsPicBox18";
             ItemsPicBox18.Size = new Size(50, 186);
             ItemsPicBox18.TabIndex = 52;
@@ -176,7 +139,7 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(14, 503);
+            label18.Location = new Point(14, 261);
             label18.Name = "label18";
             label18.Size = new Size(36, 15);
             label18.TabIndex = 51;
@@ -187,7 +150,7 @@
             ItemsPicBox17.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox17.Cursor = Cursors.Hand;
             ItemsPicBox17.Image = (Image)resources.GetObject("ItemsPicBox17.Image");
-            ItemsPicBox17.Location = new Point(14, 521);
+            ItemsPicBox17.Location = new Point(14, 279);
             ItemsPicBox17.Name = "ItemsPicBox17";
             ItemsPicBox17.Size = new Size(186, 50);
             ItemsPicBox17.TabIndex = 50;
@@ -196,7 +159,7 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(11, 574);
+            label17.Location = new Point(11, 332);
             label17.Name = "label17";
             label17.Size = new Size(35, 15);
             label17.TabIndex = 49;
@@ -208,136 +171,12 @@
             ItemsPicBox16.BorderStyle = BorderStyle.FixedSingle;
             ItemsPicBox16.Cursor = Cursors.Hand;
             ItemsPicBox16.Image = (Image)resources.GetObject("ItemsPicBox16.Image");
-            ItemsPicBox16.Location = new Point(16, 592);
+            ItemsPicBox16.Location = new Point(16, 350);
             ItemsPicBox16.Name = "ItemsPicBox16";
             ItemsPicBox16.Size = new Size(186, 191);
             ItemsPicBox16.TabIndex = 48;
             ItemsPicBox16.TabStop = false;
             ItemsPicBox16.MouseClick += PictureBox_MouseClick;
-            // 
-            // ItemsPicBox15
-            // 
-            ItemsPicBox15.BorderStyle = BorderStyle.FixedSingle;
-            ItemsPicBox15.Cursor = Cursors.Hand;
-            ItemsPicBox15.Image = (Image)resources.GetObject("ItemsPicBox15.Image");
-            ItemsPicBox15.Location = new Point(374, 733);
-            ItemsPicBox15.Name = "ItemsPicBox15";
-            ItemsPicBox15.Size = new Size(54, 50);
-            ItemsPicBox15.TabIndex = 47;
-            ItemsPicBox15.TabStop = false;
-            // 
-            // ItemsPicBox14
-            // 
-            ItemsPicBox14.BorderStyle = BorderStyle.FixedSingle;
-            ItemsPicBox14.Cursor = Cursors.Hand;
-            ItemsPicBox14.Image = (Image)resources.GetObject("ItemsPicBox14.Image");
-            ItemsPicBox14.Location = new Point(279, 733);
-            ItemsPicBox14.Name = "ItemsPicBox14";
-            ItemsPicBox14.Size = new Size(54, 50);
-            ItemsPicBox14.TabIndex = 46;
-            ItemsPicBox14.TabStop = false;
-            // 
-            // ItemsPicBox13
-            // 
-            ItemsPicBox13.BorderStyle = BorderStyle.FixedSingle;
-            ItemsPicBox13.Cursor = Cursors.Hand;
-            ItemsPicBox13.Image = (Image)resources.GetObject("ItemsPicBox13.Image");
-            ItemsPicBox13.Location = new Point(373, 567);
-            ItemsPicBox13.Name = "ItemsPicBox13";
-            ItemsPicBox13.Size = new Size(54, 50);
-            ItemsPicBox13.TabIndex = 45;
-            ItemsPicBox13.TabStop = false;
-            // 
-            // ItemsPicBox12
-            // 
-            ItemsPicBox12.BorderStyle = BorderStyle.FixedSingle;
-            ItemsPicBox12.Cursor = Cursors.Hand;
-            ItemsPicBox12.Image = (Image)resources.GetObject("ItemsPicBox12.Image");
-            ItemsPicBox12.Location = new Point(278, 567);
-            ItemsPicBox12.Name = "ItemsPicBox12";
-            ItemsPicBox12.Size = new Size(54, 50);
-            ItemsPicBox12.TabIndex = 44;
-            ItemsPicBox12.TabStop = false;
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Location = new Point(368, 644);
-            label25.Name = "label25";
-            label25.Size = new Size(73, 15);
-            label25.TabIndex = 43;
-            label25.Text = "BloqueVerde";
-            // 
-            // ItemsPicBox11
-            // 
-            ItemsPicBox11.BorderStyle = BorderStyle.FixedSingle;
-            ItemsPicBox11.Cursor = Cursors.Hand;
-            ItemsPicBox11.Image = (Image)resources.GetObject("ItemsPicBox11.Image");
-            ItemsPicBox11.Location = new Point(373, 662);
-            ItemsPicBox11.Name = "ItemsPicBox11";
-            ItemsPicBox11.Size = new Size(54, 50);
-            ItemsPicBox11.TabIndex = 42;
-            ItemsPicBox11.TabStop = false;
-            // 
-            // label28
-            // 
-            label28.AutoSize = true;
-            label28.Location = new Point(272, 644);
-            label28.Name = "label28";
-            label28.Size = new Size(67, 15);
-            label28.TabIndex = 39;
-            label28.Text = "BloqueAzul";
-            // 
-            // ItemsPicBox10
-            // 
-            ItemsPicBox10.BorderStyle = BorderStyle.FixedSingle;
-            ItemsPicBox10.Cursor = Cursors.Hand;
-            ItemsPicBox10.Image = (Image)resources.GetObject("ItemsPicBox10.Image");
-            ItemsPicBox10.Location = new Point(278, 662);
-            ItemsPicBox10.Name = "ItemsPicBox10";
-            ItemsPicBox10.Size = new Size(54, 50);
-            ItemsPicBox10.TabIndex = 38;
-            ItemsPicBox10.TabStop = false;
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Location = new Point(361, 478);
-            label22.Name = "label22";
-            label22.Size = new Size(68, 15);
-            label22.TabIndex = 35;
-            label22.Text = "BloqueRojo";
-            // 
-            // ItemsPicBox9
-            // 
-            ItemsPicBox9.BorderStyle = BorderStyle.FixedSingle;
-            ItemsPicBox9.Cursor = Cursors.Hand;
-            ItemsPicBox9.Image = (Image)resources.GetObject("ItemsPicBox9.Image");
-            ItemsPicBox9.Location = new Point(372, 496);
-            ItemsPicBox9.Name = "ItemsPicBox9";
-            ItemsPicBox9.Size = new Size(54, 50);
-            ItemsPicBox9.TabIndex = 34;
-            ItemsPicBox9.TabStop = false;
-            // 
-            // BloqueNegro
-            // 
-            BloqueNegro.AutoSize = true;
-            BloqueNegro.Location = new Point(264, 478);
-            BloqueNegro.Name = "BloqueNegro";
-            BloqueNegro.Size = new Size(77, 15);
-            BloqueNegro.TabIndex = 31;
-            BloqueNegro.Text = "BloqueNegro";
-            // 
-            // ItemsPicBox8
-            // 
-            ItemsPicBox8.BorderStyle = BorderStyle.FixedSingle;
-            ItemsPicBox8.Cursor = Cursors.Hand;
-            ItemsPicBox8.Image = (Image)resources.GetObject("ItemsPicBox8.Image");
-            ItemsPicBox8.Location = new Point(277, 496);
-            ItemsPicBox8.Name = "ItemsPicBox8";
-            ItemsPicBox8.Size = new Size(54, 50);
-            ItemsPicBox8.TabIndex = 30;
-            ItemsPicBox8.TabStop = false;
             // 
             // label14
             // 
@@ -680,36 +519,6 @@
             botonCargar.UseVisualStyleBackColor = false;
             botonCargar.Click += botonCargar_Click;
             // 
-            // menuStrip1
-            // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { navegaciónToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1940, 24);
-            menuStrip1.TabIndex = 37;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // navegaciónToolStripMenuItem
-            // 
-            navegaciónToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { previsualizaciónToolStripMenuItem, inicioToolStripMenuItem });
-            navegaciónToolStripMenuItem.Name = "navegaciónToolStripMenuItem";
-            navegaciónToolStripMenuItem.Size = new Size(82, 20);
-            navegaciónToolStripMenuItem.Text = "Navegación";
-            // 
-            // previsualizaciónToolStripMenuItem
-            // 
-            previsualizaciónToolStripMenuItem.Name = "previsualizaciónToolStripMenuItem";
-            previsualizaciónToolStripMenuItem.Size = new Size(158, 22);
-            previsualizaciónToolStripMenuItem.Text = "Previsualización";
-            previsualizaciónToolStripMenuItem.Click += previsualizaciónToolStripMenuItem_Click;
-            // 
-            // inicioToolStripMenuItem
-            // 
-            inicioToolStripMenuItem.Name = "inicioToolStripMenuItem";
-            inicioToolStripMenuItem.Size = new Size(158, 22);
-            inicioToolStripMenuItem.Text = "Inicio";
-            inicioToolStripMenuItem.Click += inicioToolStripMenuItem_Click;
-            // 
             // ModoEdicionControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -723,7 +532,6 @@
             Controls.Add(BotonInicioEdicion);
             Controls.Add(label2);
             Controls.Add(panelHerramientas);
-            Controls.Add(menuStrip1);
             Name = "ModoEdicionControl";
             Size = new Size(1940, 1055);
             panelHerramientas.ResumeLayout(false);
@@ -731,14 +539,6 @@
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox18).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox17).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox16).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox15).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox14).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox13).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox12).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox11).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ItemsPicBox8).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox5).EndInit();
@@ -746,8 +546,6 @@
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox1).EndInit();
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -789,27 +587,11 @@
         private Panel panelEdicion;
         private Label v;
         private Label planoLabel;
-        private PictureBox ItemsPicBox15;
-        private PictureBox ItemsPicBox14;
-        private PictureBox ItemsPicBox13;
-        private PictureBox ItemsPicBox12;
-        private Label label25;
-        private PictureBox ItemsPicBox11;
-        private Label label28;
-        private PictureBox ItemsPicBox10;
-        private Label label22;
-        private PictureBox ItemsPicBox9;
-        private Label BloqueNegro;
-        private PictureBox ItemsPicBox8;
         private Label label18;
         private PictureBox ItemsPicBox17;
         private Label label17;
         private PictureBox ItemsPicBox16;
         private PictureBox ItemsPicBox18;
         private Button botonCargar;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem navegaciónToolStripMenuItem;
-        private ToolStripMenuItem previsualizaciónToolStripMenuItem;
-        private ToolStripMenuItem inicioToolStripMenuItem;
     }
 }
