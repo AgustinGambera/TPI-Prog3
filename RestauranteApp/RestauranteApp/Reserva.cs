@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestauranteApp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,7 @@ public class Mozo
     }
 
 // Clases de dominio Mesa
-public class Mesa
+public class Mesa : Element
 {
 
 }

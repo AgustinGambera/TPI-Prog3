@@ -98,51 +98,52 @@ namespace RestauranteApp
         // Evento que se dispara cuando se suelta un objeto arrastrado en el panel
         private void PanelEdicion_DragDrop(object sender, DragEventArgs e)
         {
-            // Verificar si el objeto arrastrado contiene una imagen y la información adicional
             if (e.Data.GetDataPresent(DataFormats.Bitmap) && e.Data.GetDataPresent("PictureBoxSize") && e.Data.GetDataPresent("ImagePath"))
             {
                 Bitmap bmp = (Bitmap)e.Data.GetData(DataFormats.Bitmap);
                 Size originalSize = (Size)e.Data.GetData("PictureBoxSize");
                 string imagePath = (string)e.Data.GetData("ImagePath");
 
-                // Crear un nuevo PictureBox con la imagen arrastrada
                 PictureBox picBox = new PictureBox
                 {
                     Image = bmp,
-                    Location = panelEdicion.PointToClient(new Point(e.X, e.Y)), // Establecer la ubicación en el panel
+                    Location = panelEdicion.PointToClient(new Point(e.X, e.Y)),
                     Size = originalSize,
                     SizeMode = PictureBoxSizeMode.StretchImage,
-                    Tag = Guid.NewGuid(), // Asignar un nuevo GUID como Tag
-                    BackColor = Color.FromArgb(255, 255, 225) // Color de fondo inicial
+                    Name = "ItemsPicBox16", // Asigna el nombre aquí
+                    Tag = Guid.NewGuid(),
+                    BackColor = Color.FromArgb(255, 255, 225)
                 };
 
-                // Asignar los eventos de manejo al nuevo PictureBox
                 picBox.MouseDown += PictureBox_MouseDownForPanel;
                 picBox.MouseMove += PictureBox_MouseMoveForPanel;
                 picBox.MouseUp += PictureBox_MouseUpForPanel;
                 picBox.MouseClick += PictureBox_MouseClickForPanel;
 
-                // Agregar el nuevo PictureBox al panel de edición
                 panelEdicion.Controls.Add(picBox);
 
-                // Crear un nuevo elemento y agregarlo al LayoutManager
-                Element nuevoElemento = new Element
+                // Asegúrate de crear una instancia de Mesa solo si el elemento tiene el color de fondo correcto
+                if (picBox.BackColor == Color.FromArgb(255, 255, 225))
                 {
-                    Id = (Guid)picBox.Tag, // Usa el mismo GUID
-                    ImagePath = imagePath,
-                    Position = picBox.Location,
-                    Size = originalSize,
-                    Estado = "Libre",
-                    MozoEncargado = "N/A",
-                    Cliente = "N/A",
-                    Permanencia = "N/A",
-                    Consumos = "N/A",
-                    BackColor = Color.FromArgb(255, 255, 225)
-                };
+                    Mesa nuevaMesa = new Mesa
+                    {
+                        Id = (Guid)picBox.Tag,
+                        ImagePath = imagePath,
+                        Position = picBox.Location,
+                        Size = originalSize,
+                        Estado = "Libre",
+                        MozoEncargado = "N/A",
+                        Cliente = "N/A",
+                        Permanencia = "N/A",
+                        Consumos = "N/A",
+                        BackColor = Color.FromArgb(255, 255, 225)
+                    };
 
-                layoutManager.AgregarElemento(nuevoElemento);
+                    layoutManager.AgregarElemento(nuevaMesa);
+                }
             }
         }
+
 
         // Evento que se dispara cuando se presiona el botón del mouse en un PictureBox del panel de edición
         private void PictureBox_MouseDownForPanel(object sender, MouseEventArgs e)
@@ -254,8 +255,12 @@ namespace RestauranteApp
                         {
                             elemento.Estado = "Libre";
                         }
+                        else if (elemento.BackColor == Color.FromArgb(255, 255, 225))
+                        {
+                            elemento.Estado = "N/A";
+                        }
 
-                        MessageBox.Show($"Nuevo color: {pb.BackColor}");
+
                     }
                 }
             }
@@ -383,6 +388,16 @@ namespace RestauranteApp
         private void previsualizaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BackToPreviewFormRequested?.Invoke(this, EventArgs.Empty); // Invocar el evento para ir al formulario de previsualización
+        }
+
+        private void panelEdicion_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnModoPrevisualizacion_Click(object sender, EventArgs e)
+        {
+            BackToPreviewFormRequested?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -13,7 +13,10 @@ public class LayoutManager
 
     public void AgregarElemento(Element elemento)
     {
-        elementos.Add(elemento);
+        if (elemento != null && elemento is Mesa)
+        {
+            elementos.Add(elemento);
+        }
     }
 
     public void EliminarElemento(Element elemento)

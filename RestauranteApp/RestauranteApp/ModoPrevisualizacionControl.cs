@@ -31,16 +31,23 @@ namespace RestauranteApp
             CargarMesas();
             MostrarMesas();
             edicionToolStripMenuItem.Click += edicionToolStripMenuItem_Click;
+            dgvDetallesMesa.CellEndEdit += dgvDetallesMesa_CellEndEdit;
         }
 
         private void CargarMesas()
         {
             mesas = layoutManager.ObtenerElementos().Where(e => e is Mesa).Select(e => (Mesa)e).ToList();
+            AsignarNumerosDeMesa();
+        }
+
+        private void AsignarNumerosDeMesa()
+        {
             for (int i = 0; i < mesas.Count; i++)
             {
                 mesas[i].Numero = i + 1;
             }
         }
+
 
         private void MostrarMesas()
         {
@@ -79,18 +86,40 @@ namespace RestauranteApp
             var dt = new DataTable();
             dt.Columns.Add("Detalle");
             dt.Columns.Add("Información");
-            dt.Rows.Add("Numero", mesa.Id);
-            //dt.Rows.Add("Ruta de Imagen", mesa.ImagePath);
-            //dt.Rows.Add("Posicion", mesa.Position);
-            //dt.Rows.Add("Tamaño", mesa.Size);
-            //dt.Rows.Add("Color", mesa.BackColor.ToString());
-            dt.Rows.Add("Estado", mesa.Estado);
-            dt.Rows.Add("Mozo Encargado", mesa.MozoEncargado);
-            dt.Rows.Add("Cliente", mesa.Cliente);
-            dt.Rows.Add("Permanendia", mesa.Permanencia);
-            dt.Rows.Add("Consumos", mesa.Consumos);
+            dt.Columns.Add("Id", typeof(Guid)); // Añade una columna oculta para el identificador único de la mesa
+
+            dt.Rows.Add("Numero", mesa.Numero, mesa.Id);
+            dt.Rows.Add("Estado", mesa.Estado, mesa.Id);
+            dt.Rows.Add("Mozo Encargado", mesa.MozoEncargado, mesa.Id);
+            dt.Rows.Add("Cliente", mesa.Cliente, mesa.Id);
+            dt.Rows.Add("Permanencia", mesa.Permanencia, mesa.Id);
+            dt.Rows.Add("Consumos", mesa.Consumos, mesa.Id);
+
             dgvDetallesMesa.DataSource = dt;
+
+            // Hacer que las columnas de información sean editables
+            foreach (DataGridViewColumn column in dgvDetallesMesa.Columns)
+            {
+                if (column.Name == "Información")
+                {
+                    column.ReadOnly = false;
+                }
+                else
+                {
+                    column.ReadOnly = true;
+                }
+            }
+
+            // Ocultar columnas no deseadas
+            foreach (DataGridViewColumn column in dgvDetallesMesa.Columns)
+            {
+                if (column.Name == "Id")
+                {
+                    column.Visible = false;
+                }
+            }
         }
+
 
         private void btnGuardarJson_Click(object sender, EventArgs e)
         {
@@ -165,23 +194,15 @@ namespace RestauranteApp
                         if (loadedMesas != null)
                         {
                             mesas = loadedMesas;
+                            AsignarNumerosDeMesa(); // Asegurarse de asignar números de mesa después de cargar los datos
 
                             foreach (var mesa in mesas)
                             {
-                                Element elemento = new Element
+                                // Agregar solo mesas al LayoutManager
+                                if (mesa.BackColor == Color.FromArgb(255, 255, 225))
                                 {
-                                    Id = Guid.NewGuid(),
-                                    ImagePath = mesa.ImagePath,
-                                    Position = mesa.Position,
-                                    Size = mesa.Size,
-                                    Estado = mesa.Estado,
-                                    MozoEncargado = mesa.MozoEncargado,
-                                    Cliente = mesa.Cliente,
-                                    Permanencia = mesa.Permanencia,
-                                    Consumos = mesa.Consumos,
-                                    BackColor = mesa.BackColor
-                                };
-                                layoutManager.AgregarElemento(elemento);
+                                    layoutManager.AgregarElemento(mesa);
+                                }
                             }
 
                             MessageBox.Show("Datos cargados desde " + openFileDialog.FileName, "Cargar JSON", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -203,18 +224,30 @@ namespace RestauranteApp
 
 
 
+
+
         private void UpdateUIWithMesasData()
         {
             dgvDetallesMesa.DataSource = null;
             dgvDetallesMesa.DataSource = mesas;
+
+            // Ocultar columnas no deseadas
+            foreach (DataGridViewColumn column in dgvDetallesMesa.Columns)
+            {
+                if (column.Name == "Id" || column.Name == "ImagePath" || column.Name == "Size" || column.Name == "Position" || column.Name == "BackColor")
+                {
+                    column.Visible = false;
+                }
+            }
         }
+
 
 
 
         public class Mesa : Element
         {
             public int Numero { get; set; }
-            
+
         }
 
         private void botonInicioPreview_Click(object sender, EventArgs e)
@@ -230,6 +263,40 @@ namespace RestauranteApp
         private void edicionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BackToEditFormRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void dgvDetallesMesa_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvDetallesMesa.Columns[e.ColumnIndex].Name == "Información")
+            {
+                string detalle = dgvDetallesMesa.Rows[e.RowIndex].Cells["Detalle"].Value.ToString();
+                string valor = dgvDetallesMesa.Rows[e.RowIndex].Cells["Información"].Value.ToString();
+                Guid id = (Guid)dgvDetallesMesa.Rows[e.RowIndex].Cells["Id"].Value;
+                ActualizarMesa(detalle, valor, id);
+            }
+        }
+
+        private void ActualizarMesa(string detalle, string valor, Guid id)
+        {
+            var mesa = mesas.FirstOrDefault(m => m.Id == id);
+            if (mesa != null)
+            {
+                switch (detalle)
+                {
+                    case "Mozo Encargado":
+                        mesa.MozoEncargado = valor;
+                        break;
+                    case "Cliente":
+                        mesa.Cliente = valor;
+                        break;
+                    case "Permanencia":
+                        mesa.Permanencia = valor;
+                        break;
+                    case "Consumos":
+                        mesa.Consumos = valor;
+                        break;
+                }
+            }
         }
     }
 }

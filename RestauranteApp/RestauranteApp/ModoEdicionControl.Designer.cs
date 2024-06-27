@@ -69,7 +69,7 @@
             panelEdicion = new Panel();
             v = new Label();
             planoLabel = new Label();
-            botonCargar = new Button();
+            btnModoPrevisualizacion = new Button();
             panelHerramientas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox18).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ItemsPicBox17).BeginInit();
@@ -457,10 +457,10 @@
             // botonGuardar
             // 
             botonGuardar.BackColor = SystemColors.Info;
-            botonGuardar.Font = new Font("Segoe UI", 21.75F);
-            botonGuardar.Location = new Point(1552, 909);
+            botonGuardar.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic);
+            botonGuardar.Location = new Point(1390, 909);
             botonGuardar.Name = "botonGuardar";
-            botonGuardar.Size = new Size(140, 69);
+            botonGuardar.Size = new Size(457, 69);
             botonGuardar.TabIndex = 33;
             botonGuardar.Text = "Guardar";
             botonGuardar.UseVisualStyleBackColor = false;
@@ -469,8 +469,8 @@
             // BotonInicioEdicion
             // 
             BotonInicioEdicion.BackColor = SystemColors.Info;
-            BotonInicioEdicion.Font = new Font("Segoe UI", 21.75F);
-            BotonInicioEdicion.Location = new Point(1708, 910);
+            BotonInicioEdicion.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic);
+            BotonInicioEdicion.Location = new Point(939, 9);
             BotonInicioEdicion.Name = "BotonInicioEdicion";
             BotonInicioEdicion.Size = new Size(139, 68);
             BotonInicioEdicion.TabIndex = 31;
@@ -486,6 +486,7 @@
             panelEdicion.Name = "panelEdicion";
             panelEdicion.Size = new Size(1299, 898);
             panelEdicion.TabIndex = 34;
+            panelEdicion.Paint += panelEdicion_Paint;
             // 
             // v
             // 
@@ -507,29 +508,30 @@
             planoLabel.TabIndex = 35;
             planoLabel.Text = "(Arrastre los elementos)";
             // 
-            // botonCargar
+            // btnModoPrevisualizacion
             // 
-            botonCargar.BackColor = SystemColors.Info;
-            botonCargar.Font = new Font("Segoe UI", 21.75F);
-            botonCargar.Location = new Point(1390, 910);
-            botonCargar.Name = "botonCargar";
-            botonCargar.Size = new Size(140, 69);
-            botonCargar.TabIndex = 36;
-            botonCargar.Text = "Cargar";
-            botonCargar.UseVisualStyleBackColor = false;
-            botonCargar.Click += botonCargar_Click;
+            btnModoPrevisualizacion.BackColor = SystemColors.Info;
+            btnModoPrevisualizacion.Cursor = Cursors.Hand;
+            btnModoPrevisualizacion.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic);
+            btnModoPrevisualizacion.Location = new Point(1084, 9);
+            btnModoPrevisualizacion.Name = "btnModoPrevisualizacion";
+            btnModoPrevisualizacion.Size = new Size(241, 68);
+            btnModoPrevisualizacion.TabIndex = 36;
+            btnModoPrevisualizacion.Text = "Previsualizacion";
+            btnModoPrevisualizacion.UseVisualStyleBackColor = false;
+            btnModoPrevisualizacion.Click += btnModoPrevisualizacion_Click;
             // 
             // ModoEdicionControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(192, 255, 192);
-            Controls.Add(botonCargar);
+            Controls.Add(btnModoPrevisualizacion);
             Controls.Add(planoLabel);
+            Controls.Add(BotonInicioEdicion);
             Controls.Add(v);
             Controls.Add(panelEdicion);
             Controls.Add(botonGuardar);
-            Controls.Add(BotonInicioEdicion);
             Controls.Add(label2);
             Controls.Add(panelHerramientas);
             Name = "ModoEdicionControl";
@@ -592,6 +594,6 @@
         private Label label17;
         private PictureBox ItemsPicBox16;
         private PictureBox ItemsPicBox18;
-        private Button botonCargar;
+        private Button btnModoPrevisualizacion;
     }
 }

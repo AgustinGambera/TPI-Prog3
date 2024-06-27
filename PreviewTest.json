@@ -1,0 +1,172 @@
+[
+  {
+    "Id": "a3ebb034-280d-42c8-9bf5-d14084fbafeb",
+    "ImagePath": null,
+    "Position": "100, 100",
+    "Size": "186, 191",
+    "BackColor": {
+      "R": 255,
+      "G": 99,
+      "B": 71,
+      "A": 255
+    },
+    "Estado": "Ocupada",
+    "MozoEncargado": "Carlos",
+    "Cliente": "Juan Perez",
+    "Permanencia": "1h 30m",
+    "Consumos": "Pizza, Coca-Cola"
+  },
+  {
+    "Id": "71fda485-d138-4f88-a18f-f5ac59a41a9d",
+    "ImagePath": null,
+    "Position": "300, 100",
+    "Size": "186, 191",
+    "BackColor": {
+      "R": 255,
+      "G": 165,
+      "B": 0,
+      "A": 255
+    },
+    "Estado": "Reservado",
+    "MozoEncargado": "Ana",
+    "Cliente": "Maria Garcia",
+    "Permanencia": "2h",
+    "Consumos": "Ensalada, Agua"
+  },
+  {
+    "Id": "96f22565-4483-4d42-9a34-1cc3697013cf",
+    "ImagePath": null,
+    "Position": "500, 100",
+    "Size": "186, 191",
+    "BackColor": {
+      "R": 144,
+      "G": 238,
+      "B": 144,
+      "A": 255
+    },
+    "Estado": "Libre",
+    "MozoEncargado": "Luis",
+    "Cliente": "N/A",
+    "Permanencia": "N/A",
+    "Consumos": "N/A"
+  },
+  {
+    "Id": "b4f85f77-09d3-4a99-b32a-d1a6215dcffe",
+    "ImagePath": null,
+    "Position": "100, 300",
+    "Size": "186, 191",
+    "BackColor": {
+      "R": 255,
+      "G": 99,
+      "B": 71,
+      "A": 255
+    },
+    "Estado": "Ocupada",
+    "MozoEncargado": "Sofia",
+    "Cliente": "Carlos Lopez",
+    "Permanencia": "45m",
+    "Consumos": "Hamburguesa, Cerveza"
+  },
+  {
+    "Id": "cde7be21-51cc-4e34-805d-6b94621d2f37",
+    "ImagePath": null,
+    "Position": "300, 300",
+    "Size": "186, 191",
+    "BackColor": {
+      "R": 255,
+      "G": 165,
+      "B": 0,
+      "A": 255
+    },
+    "Estado": "Reservado",
+    "MozoEncargado": "Pedro",
+    "Cliente": "Lucia Martinez",
+    "Permanencia": "1h",
+    "Consumos": "Pasta, Vino"
+  },
+  {
+    "Id": "d5268ed4-71f1-4f5a-93e0-2e2971c3d022",
+    "ImagePath": null,
+    "Position": "500, 300",
+    "Size": "186, 191",
+    "BackColor": {
+      "R": 144,
+      "G": 238,
+      "B": 144,
+      "A": 255
+    },
+    "Estado": "Libre",
+    "MozoEncargado": "Marta",
+    "Cliente": "N/A",
+    "Permanencia": "N/A",
+    "Consumos": "N/A"
+  },
+  {
+    "Id": "e9dbf4d3-bf4d-4c61-91ff-d5ae1ebc6e74",
+    "ImagePath": null,
+    "Position": "100, 500",
+    "Size": "186, 191",
+    "BackColor": {
+      "R": 255,
+      "G": 99,
+      "B": 71,
+      "A": 255
+    },
+    "Estado": "Ocupada",
+    "MozoEncargado": "Raul",
+    "Cliente": "Santiago Fernandez",
+    "Permanencia": "2h 15m",
+    "Consumos": "Sushi, Sake"
+  },
+  {
+    "Id": "f2181a34-40fa-4bc0-bd56-8db3f9a4e8fa",
+    "ImagePath": null,
+    "Position": "300, 500",
+    "Size": "186, 191",
+    "BackColor": {
+      "R": 255,
+      "G": 165,
+      "B": 0,
+      "A": 255
+    },
+    "Estado": "Reservado",
+    "MozoEncargado": "Clara",
+    "Cliente": "Ana Suarez",
+    "Permanencia": "1h 45m",
+    "Consumos": "Tacos, Margarita"
+  },
+  {
+    "Id": "01fb6e2d-9ec6-49d1-8c1e-30b469b17a41",
+    "ImagePath": null,
+    "Position": "500, 500",
+    "Size": "186, 191",
+    "BackColor": {
+      "R": 144,
+      "G": 238,
+      "B": 144,
+      "A": 255
+    },
+    "Estado": "Libre",
+    "MozoEncargado": "David",
+    "Cliente": "N/A",
+    "Permanencia": "N/A",
+    "Consumos": "N/A"
+  },
+  {
+    "Id": "4acb2e7d-ffb4-47a6-8dbd-2d6c34f8a45f",
+    "ImagePath": null,
+    "Position": "100, 700",
+    "Size": "186, 191",
+    "BackColor": {
+      "R": 255,
+      "G": 99,
+      "B": 71,
+      "A": 255
+    },
+    "Estado": "Ocupada",
+    "MozoEncargado": "Elena",
+    "Cliente": "Laura Gomez",
+    "Permanencia": "1h 20m",
+    "Consumos": "Bistec, Vino Tinto"
+  }
+]

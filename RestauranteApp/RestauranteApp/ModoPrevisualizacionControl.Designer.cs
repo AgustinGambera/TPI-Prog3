@@ -95,6 +95,7 @@
             dgvDetallesMesa.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvDetallesMesa.Size = new Size(853, 600);
             dgvDetallesMesa.TabIndex = 2;
+            dgvDetallesMesa.CellEndEdit += dgvDetallesMesa_CellEndEdit;
             // 
             // btnCargarJSON
             // 
@@ -160,14 +161,14 @@
             // inicioToolStripMenuItem
             // 
             inicioToolStripMenuItem.Name = "inicioToolStripMenuItem";
-            inicioToolStripMenuItem.Size = new Size(180, 22);
+            inicioToolStripMenuItem.Size = new Size(113, 22);
             inicioToolStripMenuItem.Text = "Inicio";
             inicioToolStripMenuItem.Click += inicioToolStripMenuItem_Click;
             // 
             // edicionToolStripMenuItem
             // 
             edicionToolStripMenuItem.Name = "edicionToolStripMenuItem";
-            edicionToolStripMenuItem.Size = new Size(180, 22);
+            edicionToolStripMenuItem.Size = new Size(113, 22);
             edicionToolStripMenuItem.Text = "Edición";
             edicionToolStripMenuItem.Click += edicionToolStripMenuItem_Click;
             // 
